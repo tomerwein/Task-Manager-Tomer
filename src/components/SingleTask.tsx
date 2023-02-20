@@ -13,7 +13,6 @@ type Props = {
     setTasks: React.Dispatch<React.SetStateAction<Task[]>>,
     completedTasks: Task[],
     setCompletedTasks: React.Dispatch<React.SetStateAction<Task[]>>
-    
 }
 
 const SingleTask = ({index, task, tasks, setTasks, completedTasks, setCompletedTasks}:Props) => {
@@ -41,67 +40,62 @@ const SingleTask = ({index, task, tasks, setTasks, completedTasks, setCompletedT
       inputRef.current?.focus();
     }, [isEditClicked])
 
-        
   const handleDoubleClick = () => {
     if (isEditClicked){
         setEditClicked(!isEditClicked);
-    }
-    else{
+    } else{
         setEditClicked(!isEditClicked);
     }
   }
     
     return (
         <Draggable draggableId={task.id.toString()} index={index}>
-              {
-              (provided, snapshot) => (
-        <form className={`single_task ${snapshot.isDragging? "drag": ""}`} 
-        onSubmit={(e) => approveEdit(e, task.id)}
-            {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        ref={provided.innerRef}
-        onDoubleClick={handleDoubleClick}
-        >
-        
-        {
-            isEditClicked?
-            (<input 
-                ref={inputRef}
-                value={editText}
-                onChange={(e) => setEditText(e.target.value)}
-                className="single_task_text"
-                /> 
+            {
+            (provided, snapshot) => (
+            <form className={`single_task ${snapshot.isDragging? "drag": ""}`} 
+                onSubmit={(e) => approveEdit(e, task.id)}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                ref={provided.innerRef}
+                onDoubleClick={handleDoubleClick}>
                 
-                ) :
-                <span className='single_task_box'>{task.task}</span>
-            }
+                {
+                isEditClicked?
+                    (
+                    <input 
+                        ref={inputRef}
+                        value={editText}
+                        onChange={(e) => setEditText(e.target.value)}
+                        className="single_task_text"
+                    /> 
+                    ) : 
+                    <span className='single_task_box'>{task.task}</span>
+                }
         
-    <div>
-        <span className='icon' onClick={() => {
-            if (isEditClicked){
-                setEditClicked(!isEditClicked);
-                console.log(isEditClicked);
-            }
-            else{
-                setEditClicked(!isEditClicked);
-                console.log(isEditClicked);
-            }
-        }
-    }>
-            <GrEdit/>
-        </span>
+                <div>
 
-        <span className='icon' onClick={() => deleteTask(task.id)}>
-            <AiTwotoneDelete/>
-        
-        </span>
+                    <span className='icon' onClick={() => {
+                        if (isEditClicked) {
+                        setEditClicked(!isEditClicked);
+                        console.log(isEditClicked);
+                        } else {
+                        setEditClicked(!isEditClicked);
+                        console.log(isEditClicked);
+                        }
+                    }}>     
+                        <GrEdit />
+                    </span>
 
-        <span className='icon' onClick={() => moveToCompletedTasks(task.id)}>
-            <IoMdDoneAll/>
-        </span>
-    </div>
+                    <span className='icon' onClick={() => deleteTask(task.id)}>
+                        <AiTwotoneDelete/>            
+                    </span>
 
-    </form>
+                    <span className='icon' onClick={() => moveToCompletedTasks(task.id)}>
+                        <IoMdDoneAll/>
+                    </span>
+
+                </div>
+            </form>
             )}
     
     </Draggable>

@@ -17,7 +17,7 @@ const App: React.FC = () => {
     if (task){
       setImportantTasks([...importantTasks, {id: Date.now(), task: task, type: "important", isDone: false}]);
       setTask("");
-      console.log(importantTasks.toLocaleString);
+
     } 
   }
 
@@ -26,97 +26,66 @@ const App: React.FC = () => {
     if (task){
       setGeneralTasks([...generalTasks, {id: Date.now(), task: task, type: "general", isDone: false}]);
       setTask("");
-      console.log(generalTasks.toLocaleString);
     } 
   }
 
-  // const onDragEnd = (result: DropResult) => {
-  //   const { source, destination } = result;
-  //   if (!destination) return;
-  //   if (source.droppableId === destination.droppableId && source.index === destination.index) return;
-  
-  //   const active = [...importantTasks];
-  //   const complete = [...generalTasks];
-  //   const [removed] = active.splice(source.index, 1);
-  //   complete.splice(destination.index, 0, removed);
-  
-  //   setImportantTasks(active);
-  //   setGeneralTasks(complete);
-  // };
   const onDragEnd = (result: DropResult) => {
     const {source, destination} = result;
-   console.log(result);
-   if (!destination) return; 
-   if (
-     source.index === destination.index && 
-     source.droppableId === destination.droppableId
-     )
-     return;
+    if (!destination) return;
 
-     console.log("check")
-    console.log(importantTasks)
-    console.log(generalTasks)
-   let add,
-    important = importantTasks,
-     general = generalTasks,
-     complete = completedTasks;
-     
+    if (
+      source.index === destination.index && 
+      source.droppableId === destination.droppableId
+    )
+      return;
 
-   if (source.droppableId === 'ImportantList'){
-     add = important[source.index];
-     important.splice(source.index, 1);
-   }
-   else if (source.droppableId === 'GeneralList'){
-     add = general[source.index];
-     general.splice(source.index, 1)
-   }
+    let add,
+      important = importantTasks,
+      general = generalTasks,
+      complete = completedTasks;
 
-   else {
-    add = complete[source.index];
-     complete.splice(source.index, 1)
-   }
+    if (source.droppableId === 'ImportantList'){
+      add = important[source.index];
+      important.splice(source.index, 1);
+    } else if (source.droppableId === 'GeneralList'){
+      add = general[source.index];
+      general.splice(source.index, 1)
+    } else {
+      add = complete[source.index];
+      complete.splice(source.index, 1)
+    }
 
-   if (destination.droppableId === 'ImportantList'){
-    add.type = "important";
-    important.splice(destination.index, 0, add)
-   }
-   else if (destination.droppableId === 'GeneralList'){
-    add.type = "general";
-    general.splice(destination.index, 0, add)
-  }
-   else{ 
-    complete.splice(destination.index, 0, add) 
-   }
+    if (destination.droppableId === 'ImportantList'){
+      add.type = "important";
+      important.splice(destination.index, 0, add)
+    } else if (destination.droppableId === 'GeneralList'){
+      add.type = "general";
+      general.splice(destination.index, 0, add)
+    } else { 
+      complete.splice(destination.index, 0, add) 
+    }
 
    setImportantTasks(important); 
    setGeneralTasks(general);
    setCompletedTasks(complete);
-
- }
-
+  }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-    <div className="App">
-      <span className="heading"> Task Manager </span> 
-      <Input task={task} setTask={setTask} 
-      addToImportantList={addToImportantList} 
-      addToGeneralList={addToGeneralList}
-      
-      /> 
-      <TaskList 
-      importantTasks={importantTasks} 
-      setImportantTasks={setImportantTasks}
-      generalTasks={generalTasks}
-      setGeneralTasks={setGeneralTasks}
-      completedTasks={completedTasks}
-      setCompletedTasks={setCompletedTasks}
-      
-/>
-    </div>
-       </DragDropContext>
+      <div className="App">
+        <span className="heading"> Task Manager </span>
+        <Input task={task} setTask={setTask} addToImportantList={addToImportantList} addToGeneralList={addToGeneralList} />
+        <TaskList
+          importantTasks={importantTasks}
+          setImportantTasks={setImportantTasks}
+          generalTasks={generalTasks}
+          setGeneralTasks={setGeneralTasks}
+          completedTasks={completedTasks}
+          setCompletedTasks={setCompletedTasks}
+        />
+      </div>
+    </DragDropContext>
   );
-} 
-
+};
 
 export default App;
