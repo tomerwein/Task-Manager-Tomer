@@ -16,7 +16,7 @@ html {
   color: #ffffff;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
   font-family: 'Solitreo', cursive;
   font-size: 22px;
   padding: 0.25rem;
@@ -69,6 +69,10 @@ input[type="text"] {
     margin-left: 0.25rem;
 }
 
+.password {
+    margin-top: 10px;
+}
+
 .icon_user {
   margin-left: 6px;
   font-size: 20px;
@@ -77,3 +81,13 @@ input[type="text"] {
   right: 660px;
   top: 200px;
 }
+
+.icon_password {
+    margin-left: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 660px;
+    top: 288px;
+  }
+

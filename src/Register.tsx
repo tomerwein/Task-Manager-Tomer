@@ -5,11 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 
 const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}$/;
+const PASSWORD_REGEX: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?^*!@#$%]).{8,24}$/;
 
 const Register = () => {
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
+
+    const [password, setPassword] = useState('');
+    const [isValidPassword, setIsValidPwd] = useState(false);
+    const [passwordFocus, setPasswordFocus] = useState(false);
     
     const userRef = useRef<HTMLInputElement>(null);
 
@@ -19,7 +24,8 @@ const Register = () => {
 
     useEffect(() => {
         setValidName(USER_REGEX.test(user));
-    }, [user])
+        setIsValidPwd(PASSWORD_REGEX.test(password));
+    }, [user, password])
 
     return (
         <div className="register_box">
@@ -43,8 +49,7 @@ const Register = () => {
                 <span className="icon_user">
                     <FontAwesomeIcon icon={faCircleCheck} className={validName ? "show_v" : "hide_v"} />
                     <FontAwesomeIcon icon={faCircleXmark} className={user && !validName ? "show_x" : "hide_x"} />
-                </span>
-
+                </span>            
             </div>
 
             <p id="user_instructions" className={userFocus && user && !validName ? "info_if_not_valid" : "clean_screen"}>
@@ -53,6 +58,36 @@ const Register = () => {
                 Must begin with a letter.<br />
                 Only Letters, numbers, underscores and hyphens allowed.
             </p> 
+
+            <span className="password"> Password: </span>
+            <div>
+                <input
+                    type="password"
+                    id="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    required
+                    aria-invalid={isValidPassword ? "false" : "true"}
+                    aria-describedby="password_instruction"
+                    onFocus={() => setPasswordFocus(true)}
+                    onBlur={() => setPasswordFocus(false)}
+                />
+
+                <span className="icon_password">
+                    <FontAwesomeIcon icon={faCircleCheck} className={isValidPassword ? "show_v" : "hide_v"} />
+                    <FontAwesomeIcon icon={faCircleXmark} className={password && !isValidPassword ? "show_x" : "hide_x"} />
+                </span>       
+
+            </div>
+
+            <p id="password_instruction" className={passwordFocus && !isValidPassword ?
+                "info_if_not_valid" : "clean_screen"}>
+                <FontAwesomeIcon icon={faCircleQuestion} />
+                8 to 24 characters.<br />
+                Must include uppercase letter, lowercase letter,<br />
+                number and special character.<br />
+            </p>  
+
             </div> 
     )
 }
