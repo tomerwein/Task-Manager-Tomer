@@ -51,15 +51,15 @@ const Register = () => {
                     aria-describedby="user_instructions"
                     onFocus={() => setUserFocus(true)}
                     onBlur={() => setUserFocus(false)}
-                />
-                
-                <span className="icon_user">
-                    <FontAwesomeIcon icon={faCircleCheck} 
-                     className={validName ? "show_v" : "hide_v"} />
-                    <FontAwesomeIcon icon={faCircleXmark}
-                     className={user && !validName ? "show_x" : "hide_x"} />
-                </span>            
+                />    
             </div>
+
+            <span className="icon_user">
+                <FontAwesomeIcon icon={faCircleCheck} 
+                    className={validName ? "show_v" : "hide_v"} />
+                <FontAwesomeIcon icon={faCircleXmark}
+                    className={user && !validName ? "show_x" : "hide_x"} />
+            </span>            
 
             <p id="user_instructions"
             className={userFocus && user && !validName ? "info_if_not_valid" : "clean_screen"}>
@@ -77,22 +77,21 @@ const Register = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     required
-                    aria-invalid={isValidPassword ? "false" : "true"}
+                    aria-invalid={isValidPassword && password ? "false" : "true"}
                     aria-describedby="password_instruction"
                     onFocus={() => setPasswordFocus(true)}
                     onBlur={() => setPasswordFocus(false)}
                 />
-
-                <span className="icon_password">
-                    <FontAwesomeIcon icon={faCircleCheck}
-                     className={isValidPassword ? "show_v" : "hide_v"} />
-                    <FontAwesomeIcon icon={faCircleXmark}
-                     className={password && !isValidPassword ? "show_x" : "hide_x"} />
-                </span>       
-
             </div>
 
-            <p id="password_instruction" className={passwordFocus && !isValidPassword ?
+            <span className="icon_password">
+                <FontAwesomeIcon icon={faCircleCheck}
+                    className={isValidPassword ? "show_v" : "hide_v"} />
+                <FontAwesomeIcon icon={faCircleXmark}
+                    className={password && !isValidPassword ? "show_x" : "hide_x"} />
+            </span>       
+
+            <p id="password_instruction" className={passwordFocus && !isValidPassword && password ?
                 "info_if_not_valid" : "clean_screen"}>
                 <FontAwesomeIcon icon={faCircleQuestion} />
                 8 to 24 characters.<br />
@@ -113,16 +112,15 @@ const Register = () => {
                     onFocus={() => setMatchPasswordFocus(true)}
                     onBlur={() => setMatchPasswordFocus(false)}
                 />
-
-                <span className="icon_match_passwords">
-                    
-                    <FontAwesomeIcon icon={faCircleCheck}
-                     className={isMatchPasswords && matchPassword    ? "show_v" : "hide_v"} />
-                    <FontAwesomeIcon icon={faCircleXmark}
-                     className={matchPassword && !isMatchPasswords ? "show_x" : "hide_x"} />
-                </span>       
-
             </div>
+
+            <span className="icon_match_passwords">
+                
+                <FontAwesomeIcon icon={faCircleCheck}
+                    className={isMatchPasswords && matchPassword    ? "show_v" : "hide_v"} />
+                <FontAwesomeIcon icon={faCircleXmark}
+                    className={matchPassword && !isMatchPasswords ? "show_x" : "hide_x"} />
+            </span>       
 
             <p id="match_password_instruction" 
             className={matchPasswordFocus && !isMatchPasswords && matchPassword ?
