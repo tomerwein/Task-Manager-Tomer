@@ -15,6 +15,12 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [isValidPassword, setIsValidPwd] = useState(false);
     const [passwordFocus, setPasswordFocus] = useState(false);
+
+    const [matchPassword, setMatchPassword] = useState('');
+    const [isMatchPasswords, setIsMatchPasswords] = useState(false);
+    const [matchPasswordFocus, setMatchPasswordFocus] = useState(false);
+
+    console.log(isMatchPasswords)
     
     const userRef = useRef<HTMLInputElement>(null);
 
@@ -25,7 +31,8 @@ const Register = () => {
     useEffect(() => {
         setValidName(USER_REGEX.test(user));
         setIsValidPwd(PASSWORD_REGEX.test(password));
-    }, [user, password])
+        setIsMatchPasswords(password === matchPassword)
+    }, [user, password, matchPassword])
 
     return (
         <div className="register_box">
@@ -47,16 +54,19 @@ const Register = () => {
                 />
                 
                 <span className="icon_user">
-                    <FontAwesomeIcon icon={faCircleCheck} className={validName ? "show_v" : "hide_v"} />
-                    <FontAwesomeIcon icon={faCircleXmark} className={user && !validName ? "show_x" : "hide_x"} />
+                    <FontAwesomeIcon icon={faCircleCheck} 
+                     className={validName ? "show_v" : "hide_v"} />
+                    <FontAwesomeIcon icon={faCircleXmark}
+                     className={user && !validName ? "show_x" : "hide_x"} />
                 </span>            
             </div>
 
-            <p id="user_instructions" className={userFocus && user && !validName ? "info_if_not_valid" : "clean_screen"}>
+            <p id="user_instructions"
+            className={userFocus && user && !validName ? "info_if_not_valid" : "clean_screen"}>
                 <FontAwesomeIcon icon={faCircleQuestion} />
                 You must enter 4 to 24 characters.<br />
                 Must begin with a letter.<br />
-                Only Letters, numbers, underscores and hyphens allowed.
+                Only Letters, numbers, underscores and hyphens allowed
             </p> 
 
             <span className="password"> Password: </span>
@@ -74,8 +84,10 @@ const Register = () => {
                 />
 
                 <span className="icon_password">
-                    <FontAwesomeIcon icon={faCircleCheck} className={isValidPassword ? "show_v" : "hide_v"} />
-                    <FontAwesomeIcon icon={faCircleXmark} className={password && !isValidPassword ? "show_x" : "hide_x"} />
+                    <FontAwesomeIcon icon={faCircleCheck}
+                     className={isValidPassword ? "show_v" : "hide_v"} />
+                    <FontAwesomeIcon icon={faCircleXmark}
+                     className={password && !isValidPassword ? "show_x" : "hide_x"} />
                 </span>       
 
             </div>
@@ -85,8 +97,40 @@ const Register = () => {
                 <FontAwesomeIcon icon={faCircleQuestion} />
                 8 to 24 characters.<br />
                 Must include uppercase letter, lowercase letter,<br />
-                number and special character.<br />
-            </p>  
+                number and special character<br />
+            </p> 
+
+            <span className="matchPasswords"> Confirm password: </span>
+            <div>
+                <input
+                    type="password"
+                    id="matchPasswords"
+                    onChange={(e) => setMatchPassword(e.target.value)}
+                    value={matchPassword}
+                    required
+                    aria-invalid={isMatchPasswords ? "false" : "true"}
+                    aria-describedby="match_password_instruction"
+                    onFocus={() => setMatchPasswordFocus(true)}
+                    onBlur={() => setMatchPasswordFocus(false)}
+                />
+
+                <span className="icon_match_passwords">
+                    
+                    <FontAwesomeIcon icon={faCircleCheck}
+                     className={isMatchPasswords && matchPassword    ? "show_v" : "hide_v"} />
+                    <FontAwesomeIcon icon={faCircleXmark}
+                     className={matchPassword && !isMatchPasswords ? "show_x" : "hide_x"} />
+                </span>       
+
+            </div>
+
+            <p id="match_password_instruction" 
+            className={matchPasswordFocus && !isMatchPasswords && matchPassword ?
+                "info_if_not_valid" : "clean_screen"}>
+                <FontAwesomeIcon icon={faCircleQuestion} />
+                The passwords don't match<br />
+                
+            </p> 
 
             </div> 
     )

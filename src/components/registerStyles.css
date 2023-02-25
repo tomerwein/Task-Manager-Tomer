@@ -16,7 +16,7 @@ html {
   color: #ffffff;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"]{
   font-family: 'Solitreo', cursive;
   font-size: 22px;
   padding: 0.25rem;
@@ -41,7 +41,7 @@ input[type="text"], input[type="password"] {
     color: #fff;
     padding: 0.25rem;
     position: relative;
-    bottom: -10px;
+    bottom: -5px;
 }
 
 .info_if_not_valid > svg {
@@ -73,6 +73,10 @@ input[type="text"], input[type="password"] {
     margin-top: 10px;
 }
 
+.matchPasswords {
+    margin-top: 10px;
+}
+
 .icon_user {
   margin-left: 6px;
   font-size: 20px;
@@ -90,4 +94,13 @@ input[type="text"], input[type="password"] {
     right: 660px;
     top: 288px;
   }
+
+.icon_match_passwords {
+    margin-left: 6px;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 660px;
+    top: 365px;
+}
 
