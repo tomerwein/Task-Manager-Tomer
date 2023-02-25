@@ -36,8 +36,8 @@ const Register = () => {
     return (
         <div className="register_box">
         <span className="register_heading"> Register </span>    
-            <span className="username"> Username: </span>
-            <div>
+            <span className="username"> Username: </span>     
+            <div className="user_container"> 
                 <input
                     type="text"
                     id="username"
@@ -50,26 +50,29 @@ const Register = () => {
                     aria-describedby="user_instructions"
                     onFocus={() => setUserFocus(true)}
                     onBlur={() => setUserFocus(false)}
-                />    
-            </div>
+                /> 
 
-            <span className="icon_user">
+                <span className="icon_user">
                 <FontAwesomeIcon icon={faCircleCheck} 
                     className={validName ? "show_v" : "hide_v"} />
                 <FontAwesomeIcon icon={faCircleXmark}
                     className={user && !validName ? "show_x" : "hide_x"} />
-            </span>            
+                </span>              
 
-            <p id="user_instructions"
-            className={userFocus && user && !validName ? "info_if_not_valid" : "clean_screen"}>
-                <FontAwesomeIcon icon={faCircleQuestion} />
-                You must enter 4 to 24 characters.<br />
-                Must begin with a letter.<br />
-                Only Letters, numbers, underscores and hyphens allowed
-            </p> 
+                <p id="user_instructions"
+                    className={userFocus && user && !validName ? "info_if_not_valid" : "clean_screen"}>
+                    <FontAwesomeIcon icon={faCircleQuestion} />
+                    You must enter 4 to 24 characters.<br />
+                    Must begin with a letter.<br />
+                    Only Letters, numbers, underscores and hyphens allowed
+                </p>  
+            
+            </div>
+
 
             <span className="password"> Password: </span>
-            <div>
+            
+            <div className="password_container">
                 <input
                     type="password"
                     id="password"
@@ -81,25 +84,30 @@ const Register = () => {
                     onFocus={() => setPasswordFocus(true)}
                     onBlur={() => setPasswordFocus(false)}
                 />
+
+                <span className="icon_password">
+                    <FontAwesomeIcon icon={faCircleCheck}
+                        className={isValidPassword ? "show_v" : "hide_v"} />
+                    <FontAwesomeIcon icon={faCircleXmark}
+                        className={password && !isValidPassword ? "show_x" : "hide_x"} />
+                </span>   
+
+                <p id="password_instruction" className={passwordFocus && !isValidPassword && password ?
+                    "info_if_not_valid" : "clean_screen"}>
+                    <FontAwesomeIcon icon={faCircleQuestion} />
+                     8 to 24 characters.<br />
+                    Must include uppercase letter, lowercase letter,<br />
+                    number and special character<br />
+                </p> 
+
             </div>
 
-            <span className="icon_password">
-                <FontAwesomeIcon icon={faCircleCheck}
-                    className={isValidPassword ? "show_v" : "hide_v"} />
-                <FontAwesomeIcon icon={faCircleXmark}
-                    className={password && !isValidPassword ? "show_x" : "hide_x"} />
-            </span>       
+                
 
-            <p id="password_instruction" className={passwordFocus && !isValidPassword && password ?
-                "info_if_not_valid" : "clean_screen"}>
-                <FontAwesomeIcon icon={faCircleQuestion} />
-                8 to 24 characters.<br />
-                Must include uppercase letter, lowercase letter,<br />
-                number and special character<br />
-            </p> 
 
             <span className="matchPasswords"> Confirm password: </span>
-            <div>
+            
+            <div className="match_container">
                 <input
                     type="password"
                     id="matchPasswords"
@@ -111,21 +119,22 @@ const Register = () => {
                     onFocus={() => setMatchPasswordFocus(true)}
                     onBlur={() => setMatchPasswordFocus(false)}
                 />
-            </div>
+                
+                <span className="icon_match_passwords">
+                    <FontAwesomeIcon icon={faCircleCheck}
+                        className={isMatchPasswords && matchPassword ? "show_v" : "hide_v"} />
+                    <FontAwesomeIcon icon={faCircleXmark}
+                        className={matchPassword && !isMatchPasswords ? "show_x" : "hide_x"} />
+                </span>
 
-            <span className="icon_match_passwords">
-                <FontAwesomeIcon icon={faCircleCheck}
-                    className={isMatchPasswords && matchPassword ? "show_v" : "hide_v"} />
-                <FontAwesomeIcon icon={faCircleXmark}
-                    className={matchPassword && !isMatchPasswords ? "show_x" : "hide_x"} />
-            </span>       
+                <p id="match_password_instruction" 
+                    className={matchPasswordFocus && !isMatchPasswords && matchPassword ?
+                    "info_if_not_valid" : "clean_screen"}>
+                    <FontAwesomeIcon icon={faCircleQuestion} />
+                    The passwords don't match<br />       
+                </p> 
 
-            <p id="match_password_instruction" 
-            className={matchPasswordFocus && !isMatchPasswords && matchPassword ?
-                "info_if_not_valid" : "clean_screen"}>
-                <FontAwesomeIcon icon={faCircleQuestion} />
-                The passwords don't match<br />       
-            </p> 
+            </div>           
             
             <button className="sign_up_button" 
             disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}>
