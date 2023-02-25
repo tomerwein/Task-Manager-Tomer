@@ -20,7 +20,6 @@ const Register = () => {
     const [isMatchPasswords, setIsMatchPasswords] = useState(false);
     const [matchPasswordFocus, setMatchPasswordFocus] = useState(false);
 
-    console.log(isMatchPasswords)
     
     const userRef = useRef<HTMLInputElement>(null);
 
@@ -115,9 +114,8 @@ const Register = () => {
             </div>
 
             <span className="icon_match_passwords">
-                
                 <FontAwesomeIcon icon={faCircleCheck}
-                    className={isMatchPasswords && matchPassword    ? "show_v" : "hide_v"} />
+                    className={isMatchPasswords && matchPassword ? "show_v" : "hide_v"} />
                 <FontAwesomeIcon icon={faCircleXmark}
                     className={matchPassword && !isMatchPasswords ? "show_x" : "hide_x"} />
             </span>       
@@ -126,11 +124,16 @@ const Register = () => {
             className={matchPasswordFocus && !isMatchPasswords && matchPassword ?
                 "info_if_not_valid" : "clean_screen"}>
                 <FontAwesomeIcon icon={faCircleQuestion} />
-                The passwords don't match<br />
-                
+                The passwords don't match<br />       
             </p> 
-
+            
+            <button className="sign_up_button" 
+            disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}>
+                Sign Up
+            </button>
+            
             </div> 
+            
     )
 }
 
