@@ -1,7 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Neucha&family=Solitreo&display=swap');
 
-.register_heading {
+.register_heading, .sign_in_heading {
     text-transform: uppercase;
     width: 400px;
     font-size: 40px;
@@ -52,6 +52,9 @@ input[type="text"], input[type="password"]{
     font-size: 22px;
     padding: 0.25rem;
     border-radius: 0.5rem;
+    position: relative;
+    right: 15px;
+    width: 250px;
   }
 
 .show_v {
@@ -71,10 +74,10 @@ input[type="text"], input[type="password"]{
 }
 
 .icon_user, .icon_password, .icon_match_passwords {
-    margin-left: 6px;
     font-size: 20px;
     cursor: pointer;
     position: relative;
+    right: 12px
   }
 
 .password {
@@ -113,6 +116,28 @@ input[type="text"], input[type="password"]{
   }
 
   .sign_up_button:active:not([disabled]) {
+    background-color: #3e1a79;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+.sign_in_button {
+    width: 100px;
+    height: 40px;
+    margin-top: 15px;
+    transition-duration: 0.3s;
+    color: rgb(4, 84, 255);
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.sign_in_button:hover {
+    background-color: #9d06e9; 
+    color: rgb(255, 255, 255);
+  }
+
+  .sign_in_button:active {
     background-color: #3e1a79;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
