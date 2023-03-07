@@ -6,6 +6,7 @@ import "./App.css"
 
 const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}$/;
 const PASSWORD_REGEX: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?^*!@#$%]).{8,24}$/;
+const REGISTER_URL: string = 'http://localhost:3500/register';
 
 const Register = () => {
     const [user, setUser] = useState('');
@@ -20,6 +21,8 @@ const Register = () => {
     const [isMatchPasswords, setIsMatchPasswords] = useState(false);
     const [matchPasswordFocus, setMatchPasswordFocus] = useState(false);
 
+    const [errorMessage, setErrorMessage] = useState('');
+    const [success, setSuccess] = useState(false);
     
     const userRef = useRef<HTMLInputElement>(null);
 
@@ -31,7 +34,45 @@ const Register = () => {
         setValidName(USER_REGEX.test(user));
         setIsValidPwd(PASSWORD_REGEX.test(password));
         setIsMatchPasswords(password === matchPassword)
-    }, [user, password, matchPassword])
+        setErrorMessage('');
+    }, [user, password, matchPassword]) 
+
+    const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+        console.log("hey");
+        e.preventDefault();
+
+        try {
+            const response = await fetch(REGISTER_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user: user, password: password })
+            });
+    
+            const data = await response.json();
+            console.log(response);
+            console.log(data);
+            setSuccess(true);
+            setUser('');
+            setPassword('');
+            setMatchPassword('');
+
+             
+        } catch (err: any) {
+            console.log(`err: ${err.message}`);
+            if (!err?.response) {
+                setErrorMessage("No server response");
+                console.log(errorMessage);
+                console.log("wow1");
+            } else if (err.response?.status === 409) {
+                setErrorMessage('Username Taken');
+            } else {
+                setErrorMessage('Registration Failed')
+            }
+        }
+        
+    }
 
     return (
         <div className="register_box">
@@ -137,7 +178,8 @@ const Register = () => {
             </div>           
             
             <button className="sign_up_button" 
-            disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}>
+            disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}
+            onClick={handleSubmit}>
                 Sign Up
             </button>
             
