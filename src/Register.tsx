@@ -38,7 +38,6 @@ const Register = () => {
     }, [user, password, matchPassword]) 
 
     const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
-        console.log("hey");
         e.preventDefault();
 
         try {
@@ -53,18 +52,22 @@ const Register = () => {
             const data = await response.json();
             console.log(response);
             console.log(data);
-            setSuccess(true);
-            setUser('');
-            setPassword('');
-            setMatchPassword('');
-
-             
+            console.log("hello1")
+            if (response.status !== 409) {
+                setSuccess(true);
+                setUser('');
+                setPassword('');
+                setMatchPassword('');
+                setErrorMessage('Username Taken');
+                console.log(errorMessage)
+                console.log(success);
+            }
+                
         } catch (err: any) {
             console.log(`err: ${err.message}`);
             if (!err?.response) {
                 setErrorMessage("No server response");
                 console.log(errorMessage);
-                console.log("wow1");
             } else if (err.response?.status === 409) {
                 setErrorMessage('Username Taken');
             } else {
@@ -181,8 +184,8 @@ const Register = () => {
             disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}
             onClick={handleSubmit}>
                 Sign Up
-            </button>
-            
+            </button>         
+
             </div> 
             
     )
