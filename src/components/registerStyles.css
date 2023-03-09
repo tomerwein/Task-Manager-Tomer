@@ -12,18 +12,42 @@
 }
 
 html {
-  /* font-family: cursive; */
   font-size: 22px;
   color: rgb(4, 84, 255);
 }
 
 .register_box {
+    /* padding: 500px; */
     background-color: #b3cbcd;
-    padding-top: 41px;
-    min-width: 100vw;
-    min-height: 94.2vh;
+    min-width: 80vw;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.border_the_login {
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 5px;  
+    max-height: 400px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Solitreo", cursive;
+}
+
+.border_the_register {
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 5px;  
+    max-height: 600px;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     font-family: "Solitreo", cursive;
 }
@@ -100,7 +124,7 @@ input[type="text"], input[type="password"]{
 }
 
 .sign_up_button:not([disabled]) {
-    width: 100px;
+    width: 150px;
     height: 40px;
     margin-top: 15px;
     transition-duration: 0.3s;
@@ -166,6 +190,25 @@ input[type="text"], input[type="password"]{
   }
 
 .check_in_button:active {
+    color: #3e1a79;
+    transform: translateY(1px);
+  }
+
+.register_password_button {
+    padding: 15px;
+    color: rgb(4, 84, 255);
+    font-family: 'Solitero', cursive;
+    background-color: transparent;
+    cursor: pointer;
+    border: transparent;
+    font-size: 16px;
+}
+
+.register_password_button:hover {
+    color: #9d06e9; ;
+  }
+
+.register_password_button:active {
     color: #3e1a79;
     transform: translateY(1px);
   }

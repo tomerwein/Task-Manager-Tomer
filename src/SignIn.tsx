@@ -3,8 +3,11 @@ import { useRef, useState, useEffect } from "react";
 import {faCircleCheck, faCircleXmark, faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
+import Register from "./Register";
 
 const SignIn = () => {
+    const [notRegister, setNotRegister] = useState(false);
+
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
@@ -20,7 +23,9 @@ const SignIn = () => {
     }, [])
 
     return (
+        notRegister ? <Register/> :
         <div className="register_box">
+            <div className="border_the_login">
         <span className="sign_in_heading"> Login </span>    
             <span className="username"> Username: </span>     
             <div className="user_container"> 
@@ -91,9 +96,22 @@ const SignIn = () => {
             <button className="sign_in_button">
                 Login
             </button>
+
+            <span className="register_password_container"> 
+                <button className="register_password_button" 
+                    onClick={() => setNotRegister(true)}>          
+                    Don't have an account?
+                </button>
+
+                <button className="register_password_button">          
+                    Forgot your password?
+                </button>
+            </span>
             
+            </div>
             </div> 
-            
+
+                        
     )
 }
 

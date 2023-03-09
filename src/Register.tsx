@@ -82,6 +82,7 @@ const Register = () => {
     return (
         checkIn ? <SignIn/> :
         <div className="register_box">
+            <div className="border_the_register">
         <span className="register_heading"> Register </span>    
             <span className="username"> Username: </span>     
             <div className="user_container"> 
@@ -195,7 +196,7 @@ const Register = () => {
                     Check-In!
                 </button>
             </span>
-
+            </div>
             </div> 
             
     )
