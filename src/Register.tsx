@@ -73,8 +73,7 @@ const Register = () => {
             } else {
                 setErrorMessage('Registration Failed')
             }
-        }
-        
+        }  
     }
 
     return (
@@ -181,10 +180,19 @@ const Register = () => {
             </div>           
             
             <button className="sign_up_button" 
-            disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}
-            onClick={handleSubmit}>
-                Sign Up
-            </button>         
+                disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}
+                onClick={handleSubmit}>
+                Create account
+            </button>
+            
+            <span className="have_an_account"> Already have an account?
+            <button className="check_in_button" 
+                    onClick={handleSubmit}>
+                    
+                    Check-In!
+                </button>
+
+                </span>
 
             </div> 
             
@@ -192,3 +200,4 @@ const Register = () => {
 }
 
 export default Register
+

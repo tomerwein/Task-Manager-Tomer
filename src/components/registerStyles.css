@@ -5,7 +5,7 @@
     text-transform: uppercase;
     width: 400px;
     font-size: 40px;
-    margin: 30px 0;
+    margin: 20px 0;
     color: rgb(4, 84, 255);
     z-index: 1;
     text-align: center;
@@ -89,7 +89,7 @@ input[type="text"], input[type="password"]{
 }
 
 .sign_up_button {
-    width: 100px;
+    width: 150px;
     height: 40px;
     margin-top: 15px;
     transition-duration: 0.3s;
@@ -115,7 +115,7 @@ input[type="text"], input[type="password"]{
     color: rgb(255, 255, 255);
   }
 
-  .sign_up_button:active:not([disabled]) {
+.sign_up_button:active:not([disabled]) {
     background-color: #3e1a79;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
@@ -137,7 +137,7 @@ input[type="text"], input[type="password"]{
     color: rgb(255, 255, 255);
   }
 
-  .sign_in_button:active {
+.sign_in_button:active {
     background-color: #3e1a79;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
@@ -148,3 +148,24 @@ input[type="text"], input[type="password"]{
     padding-left: 165px;
 }
 
+.have_an_account {
+    margin-top: 15px;
+}
+
+.check_in_button {
+    color: rgb(214, 31, 31);
+    font-family: 'Solitero', cursive;
+    background-color: transparent;
+    cursor: pointer;
+    border: transparent;
+    font-size: 18px;
+}
+
+.check_in_button:hover {
+    color: #9d06e9; ;
+  }
+
+.check_in_button:active {
+    color: #3e1a79;
+    transform: translateY(1px);
+  }
