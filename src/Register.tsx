@@ -3,12 +3,15 @@ import { useRef, useState, useEffect } from "react";
 import {faCircleCheck, faCircleXmark, faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
+import SignIn from "./SignIn";
 
 const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}$/;
 const PASSWORD_REGEX: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?^*!@#$%]).{8,24}$/;
 const REGISTER_URL: string = 'http://localhost:3500/register';
 
 const Register = () => {
+    const [checkIn, setCheckIn] = useState(false)
+
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
@@ -77,6 +80,7 @@ const Register = () => {
     }
 
     return (
+        checkIn ? <SignIn/> :
         <div className="register_box">
         <span className="register_heading"> Register </span>    
             <span className="username"> Username: </span>     
@@ -186,13 +190,11 @@ const Register = () => {
             </button>
             
             <span className="have_an_account"> Already have an account?
-            <button className="check_in_button" 
-                    onClick={handleSubmit}>
-                    
+                <button className="check_in_button" 
+                    onClick={() => setCheckIn(true)}>          
                     Check-In!
                 </button>
-
-                </span>
+            </span>
 
             </div> 
             

@@ -3,7 +3,7 @@
 
 .register_heading, .sign_in_heading {
     text-transform: uppercase;
-    width: 400px;
+    width: 200px;
     font-size: 40px;
     margin: 20px 0;
     color: rgb(4, 84, 255);
@@ -12,14 +12,14 @@
 }
 
 html {
-  font-family: 'Solitreo', cursive;
+  /* font-family: cursive; */
   font-size: 22px;
   color: rgb(4, 84, 255);
 }
 
 .register_box {
     background-color: #b3cbcd;
-    padding-top: 40px;
+    padding-top: 41px;
     min-width: 100vw;
     min-height: 94.2vh;
     display: flex;
