@@ -29,7 +29,7 @@ html {
     border-style: solid;
     border-radius: 20px;
     border-width: 5px;  
-    max-height: 400px;
+    max-height: 600px;
     max-width: 450px;
     display: flex;
     flex-direction: column;
@@ -247,4 +247,13 @@ font-family: 'Neucha', cursive;
 
 .succeed_text_container {
     padding-bottom: 250px;
+}
+
+.error_message_username_taken {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #ed0000;
+    color: #fff;
+    padding: 0.25rem;
+    /* margin-top: 10px; */
 }

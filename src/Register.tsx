@@ -1,9 +1,10 @@
 import "./components/registerStyles.css" 
 import { useRef, useState, useEffect } from "react";
-import {faCircleCheck, faCircleXmark, faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
+import {faCircleCheck, faCircleXmark, faCircleQuestion, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 import SignIn from "./SignIn";
+import RegisterSucceed from "./RegisterSucceed";
 
 const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}$/;
 const PASSWORD_REGEX: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?^*!@#$%]).{8,24}$/;
@@ -61,9 +62,10 @@ const Register = () => {
                 setUser('');
                 setPassword('');
                 setMatchPassword('');
-                setErrorMessage('Username Taken');
                 console.log(errorMessage)
                 console.log(success);
+            } else{
+                setErrorMessage('Username Taken');
             }
                 
         } catch (err: any) {
@@ -81,6 +83,7 @@ const Register = () => {
 
     return (
         checkIn ? <SignIn/> :
+        success ? <RegisterSucceed/> :
         <div className="register_box">
             <div className="border_the_register">
         <span className="register_heading"> Register </span>    
@@ -189,6 +192,13 @@ const Register = () => {
                 onClick={handleSubmit}>
                 Create account
             </button>
+
+            <p className={errorMessage === "Username Taken" ?
+                    "error_message_username_taken" : "clean_screen"}>
+                    <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "10px" }}/>
+                      User name is taken, choose another user name<br />       
+            </p> 
+        
             
             <span className="have_an_account"> Already have an account?
                 <button className="check_in_button" 
