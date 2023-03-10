@@ -17,7 +17,6 @@ html {
 }
 
 .register_box {
-    /* padding: 500px; */
     background-color: #b3cbcd;
     min-width: 80vw;
     min-height: 100vh;
@@ -212,3 +211,40 @@ input[type="text"], input[type="password"]{
     color: #3e1a79;
     transform: translateY(1px);
   }
+
+.succeed_container {
+background-color: #b3cbcd;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+font-family: 'Neucha', cursive;
+}
+
+.register_succeed_text {
+    padding-bottom: 300px;
+    width: 400px;
+    font-size: 50px;
+    margin: 20px 0;
+}
+
+.check_in_container {
+    margin-left: 80px;
+    width: 400px;
+    font-size: 40px;
+}
+
+.check_in_succeed_button {
+    color: rgb(214, 31, 31);
+    font-family: 'Solitero', cursive;
+    background-color: transparent;
+    cursor: pointer;
+    border: transparent;
+    font-size: 28px;
+}
+
+.succeed_text_container {
+    padding-bottom: 250px;
+}
