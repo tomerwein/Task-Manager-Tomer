@@ -12,14 +12,34 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
+app.get('/register', (req, res) => {
+  const { user, password } = req.query;
+  const existingData = fs.readFileSync('src/data/db.json');
+  const data = JSON.parse(existingData);
+  
+  const userExists = data.register.some((entry) => entry.user === user);
+  if (!userExists){
+    res.status(404).send({message: 'User is not exist'});
+    return;
+  }
+
+  const passwordCorrect = data.register.some((entry) => entry.user === user && entry.password == password);
+  if (!passwordCorrect){
+    res.status(401).send({message: 'Password is not correct'});
+    return;
+  }
+
+  res.status(200).send(data.register);
+});
+
 app.post('/register', (req, res) => {
-  const { user, password } = req.body;
-  console.log(user, password);
+  const { user, password, important_tasks, general_tasks, completed_tasks } = req.body;
+  // console.log(user, password);
 
   const existingData = fs.readFileSync('src/data/db.json');
 
   const data = JSON.parse(existingData);
-  console.log(data);
+  // console.log(data);
 
   const userExists = data.register.some((entry) => entry.user === user);
   if (userExists) {
@@ -27,7 +47,7 @@ app.post('/register', (req, res) => {
     return;
   }
 
-  data.register.push({user, password});
+  data.register.push({user, password, important_tasks, general_tasks, completed_tasks});
 
   fs.writeFileSync('src/data/db.json', JSON.stringify(data));
 

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 import SignIn from "./SignIn";
 import RegisterSucceed from "./RegisterSucceed";
+import Task from "./taskInfo";
 
 const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}$/;
 const PASSWORD_REGEX: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?^*!@#$%]).{8,24}$/;
@@ -50,9 +51,10 @@ const Register = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ user: user, password: password })
+                body: JSON.stringify({ user: user, password: password,
+                    important_tasks: [], general_tasks: [], completed_tasks: [] })
             });
-    
+     
             const data = await response.json();
             console.log(response);
             console.log(data);
