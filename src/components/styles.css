@@ -124,6 +124,7 @@
 }
 
 .single_task{
+  color: black;
   display: flex;
   border-radius: 8px;
   padding: 8px;
@@ -153,6 +154,7 @@
 }
 
 .icon {
+  color: black;
   margin-left: 6px;
   font-size: 20px;
   cursor: pointer;

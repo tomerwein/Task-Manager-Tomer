@@ -4,11 +4,14 @@ import {faCircleCheck, faCircleXmark, faCircleQuestion} from "@fortawesome/free-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 import Register from "./Register";
+import TaskManager from "./TaskManager";
 
 const REGISTER_URL: string = 'http://localhost:3500/register';
 
 const SignIn = () => {
     const [errorMessage, setErrorMessage] = useState('');
+
+    const [userAllowToEnterTaskManager, setUserAllowToEnterTaskManager] = useState(false);
 
     const [notRegister, setNotRegister] = useState(false);
 
@@ -42,6 +45,7 @@ const SignIn = () => {
             console.log(data);
             if (response.status === 200) {
                 console.log("success");
+                setUserAllowToEnterTaskManager(true);
             } else if (response.status === 404){
                 console.log("user name");
                 setErrorMessage('Username is not exist');
@@ -64,6 +68,7 @@ const SignIn = () => {
     }
 
     return (
+        userAllowToEnterTaskManager ? <TaskManager/> :
         notRegister ? <Register/> :
         <div className="register_box">
             <div className="border_the_login">
@@ -90,14 +95,6 @@ const SignIn = () => {
                 <FontAwesomeIcon icon={faCircleXmark}
                     className={user && !validName ? "show_x" : "hide_x"} />
                 </span>              
-
-                {/* <p id="user_instructions"
-                    className={userFocus && user && !validName ? "info_if_not_valid" : "clean_screen"}>
-                    <FontAwesomeIcon icon={faCircleQuestion} />
-                    You must enter 4 to 24 characters.<br />
-                    Must begin with a letter.<br />
-                    Only Letters, numbers, underscores and hyphens allowed
-                </p>   */}
             
             </div>
 
@@ -123,14 +120,6 @@ const SignIn = () => {
                     <FontAwesomeIcon icon={faCircleXmark}
                         className={password && !isValidPassword ? "show_x" : "hide_x"} />
                 </span>   
-
-                {/* <p id="password_instruction" className={passwordFocus && !isValidPassword && password ?
-                    "info_if_not_valid" : "clean_screen"}>
-                    <FontAwesomeIcon icon={faCircleQuestion} />
-                     8 to 24 characters.<br />
-                    Must include uppercase letter, lowercase letter,<br />
-                    number and special character<br />
-                </p>  */}
 
             </div>          
             
