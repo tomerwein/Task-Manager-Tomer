@@ -16,6 +16,10 @@ app.get('/register', (req, res) => {
   const { user, password } = req.query;
   const existingData = fs.readFileSync('src/data/db.json');
   const data = JSON.parse(existingData);
+
+  if (user === '' || password === ''){
+    res.status(403).send({message: 'username or password is missing'})
+  }
   
   const userExists = data.register.some((entry) => entry.user === user);
   if (!userExists){
@@ -34,12 +38,10 @@ app.get('/register', (req, res) => {
 
 app.post('/register', (req, res) => {
   const { user, password, important_tasks, general_tasks, completed_tasks } = req.body;
-  // console.log(user, password);
 
   const existingData = fs.readFileSync('src/data/db.json');
 
   const data = JSON.parse(existingData);
-  // console.log(data);
 
   const userExists = data.register.some((entry) => entry.user === user);
   if (userExists) {

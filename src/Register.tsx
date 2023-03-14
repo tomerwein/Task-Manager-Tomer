@@ -196,9 +196,9 @@ const Register = () => {
             </button>
 
             <p className={errorMessage === "Username Taken" ?
-                    "error_message_username_taken" : "clean_screen"}>
-                    <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "10px" }}/>
-                      User name is taken, choose another user name<br />       
+                "error_message" : "clean_screen"}>
+                <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "10px" }}/>
+                    User name is taken, choose another user name<br />       
             </p> 
         
             

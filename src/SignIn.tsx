@@ -1,6 +1,6 @@
 import "./components/registerStyles.css" 
 import { useRef, useState, useEffect } from "react";
-import {faCircleCheck, faCircleXmark, faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
+import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 import Register from "./Register";
@@ -10,16 +10,12 @@ import Task from "./taskInfo";
 const REGISTER_URL: string = 'http://localhost:3500/register';
 
 const SignIn = () => {
-    /* TOMER */
     const [importantTasks, setImportantTasks] = useState<Task[]>([]);
     const [generalTasks, setGeneralTasks] = useState<Task[]>([]);
     const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
-    
 
     const [errorMessage, setErrorMessage] = useState('');
-
     const [userAllowToEnterTaskManager, setUserAllowToEnterTaskManager] = useState(false);
-
     const [notRegister, setNotRegister] = useState(false);
 
     const [user, setUser] = useState('');
@@ -34,6 +30,7 @@ const SignIn = () => {
 
     useEffect(() => {
         userRef.current?.focus();
+        setErrorMessage('');
     }, [])
 
     const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -48,14 +45,16 @@ const SignIn = () => {
             });
     
             const data = await response.json();
-            console.log(response);
-            console.log(data);
+
             if (response.status === 200) {                
                 const userDetails = data.find((item:any) => item.user === user)
                 setImportantTasks (userDetails.important_tasks);
                 setGeneralTasks (userDetails.general_tasks);
                 setCompletedTasks(userDetails.completed_tasks);
                 setUserAllowToEnterTaskManager(true);
+            } else if (response.status === 403){
+                console.log("user or password");
+                setErrorMessage('Username or password is missing');
             } else if (response.status === 404){
                 console.log("user name");
                 setErrorMessage('Username is not exist');
@@ -103,15 +102,7 @@ const SignIn = () => {
                     aria-describedby="user_instructions"
                     onFocus={() => setUserFocus(true)}
                     onBlur={() => setUserFocus(false)}
-                /> 
-
-                <span className="icon_user">
-                <FontAwesomeIcon icon={faCircleCheck} 
-                    className={validName ? "show_v" : "hide_v"} />
-                <FontAwesomeIcon icon={faCircleXmark}
-                    className={user && !validName ? "show_x" : "hide_x"} />
-                </span>              
-            
+                />        
             </div>
 
 
@@ -129,20 +120,30 @@ const SignIn = () => {
                     onFocus={() => setPasswordFocus(true)}
                     onBlur={() => setPasswordFocus(false)}
                 />
-
-                <span className="icon_password">
-                    <FontAwesomeIcon icon={faCircleCheck}
-                        className={isValidPassword ? "show_v" : "hide_v"} />
-                    <FontAwesomeIcon icon={faCircleXmark}
-                        className={password && !isValidPassword ? "show_x" : "hide_x"} />
-                </span>   
-
             </div>          
             
             <button className="sign_in_button"
             onClick={handleSubmit}>
                 Login
             </button>
+
+            <p className={errorMessage === "Username is not exist" ?
+                "error_message" : "clean_screen"}>
+                <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "8px" }}/>
+                    User name is not exist, try again! <br />       
+            </p> 
+
+            <p className={errorMessage === "Wrong password" ?
+                "error_message" : "clean_screen"}>
+                <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "8px" }}/>
+                    Oops password is wrong <br />       
+            </p>
+
+            <p className={errorMessage === "Username or password is missing" ?
+                "error_message" : "clean_screen"}>
+                <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "8px" }}/>
+                    Username or password is missing <br />       
+            </p>  
 
             <span className="register_password_container"> 
                 <button className="register_password_button" 

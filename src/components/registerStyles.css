@@ -249,13 +249,12 @@ input[type="text"], input[type="password"]{
     padding-bottom: 250px;
 }
 
-.error_message_username_taken {
+.error_message {
     font-size: 0.75rem;
     border-radius: 0.5rem;
     background: #ed0000;
     color: #fff;
     padding: 0.25rem;
-    /* margin-top: 10px; */
 }
 
 
