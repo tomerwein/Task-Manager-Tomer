@@ -213,14 +213,14 @@ input[type="text"], input[type="password"]{
   }
 
 .succeed_container {
-background-color: #b3cbcd;
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-font-family: 'Neucha', cursive;
+    background-color: #b3cbcd;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Neucha', cursive;
 }
 
 .register_succeed_text {
@@ -240,7 +240,7 @@ font-family: 'Neucha', cursive;
     color: rgb(214, 31, 31);
     font-family: 'Solitero', cursive;
     background-color: transparent;
-    cursor: pointer;
+    cursor: pointer; 
     border: transparent;
     font-size: 28px;
 }
@@ -257,3 +257,5 @@ font-family: 'Neucha', cursive;
     padding: 0.25rem;
     /* margin-top: 10px; */
 }
+
+

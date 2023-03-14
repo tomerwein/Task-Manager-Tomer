@@ -5,10 +5,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 import Register from "./Register";
 import TaskManager from "./TaskManager";
+import Task from "./taskInfo";
 
 const REGISTER_URL: string = 'http://localhost:3500/register';
 
 const SignIn = () => {
+    /* TOMER */
+    const [importantTasks, setImportantTasks] = useState<Task[]>([]);
+    const [generalTasks, setGeneralTasks] = useState<Task[]>([]);
+    const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
+    
+
     const [errorMessage, setErrorMessage] = useState('');
 
     const [userAllowToEnterTaskManager, setUserAllowToEnterTaskManager] = useState(false);
@@ -43,8 +50,11 @@ const SignIn = () => {
             const data = await response.json();
             console.log(response);
             console.log(data);
-            if (response.status === 200) {
-                console.log("success");
+            if (response.status === 200) {                
+                const userDetails = data.find((item:any) => item.user === user)
+                setImportantTasks (userDetails.important_tasks);
+                setGeneralTasks (userDetails.general_tasks);
+                setCompletedTasks(userDetails.completed_tasks);
                 setUserAllowToEnterTaskManager(true);
             } else if (response.status === 404){
                 console.log("user name");
@@ -68,7 +78,13 @@ const SignIn = () => {
     }
 
     return (
-        userAllowToEnterTaskManager ? <TaskManager/> :
+        userAllowToEnterTaskManager ? <TaskManager
+        importantTasks={importantTasks}
+        setImportantTasks={setImportantTasks}
+        generalTasks={generalTasks}
+        setGeneralTasks={setGeneralTasks}
+        completedTasks={completedTasks}
+        setCompletedTasks={setCompletedTasks}/> :
         notRegister ? <Register/> :
         <div className="register_box">
             <div className="border_the_login">

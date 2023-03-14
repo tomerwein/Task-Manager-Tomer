@@ -5,11 +5,28 @@ import Task from './taskInfo';
 import TaskList from './components/TaskList';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
-const TaskManager: React.FC = () => {
+/* tomer */
+interface Props {
+  importantTasks: Task[],
+  setImportantTasks: React.Dispatch<React.SetStateAction<Task[]>>,
+  generalTasks: Task[],
+  setGeneralTasks: React.Dispatch<React.SetStateAction<Task[]>>,
+  completedTasks: Task[],
+  setCompletedTasks: React.Dispatch<React.SetStateAction<Task[]>>
+}
+
+// React.FC --> I deleted this
+/* tomer */
+
+const TaskManager = ({
+  importantTasks, setImportantTasks,
+  generalTasks, setGeneralTasks,
+  completedTasks, setCompletedTasks,
+}: Props) => {
     const [task, setTask] = useState<string>("");
-    const [importantTasks, setImportantTasks] = useState<Task[]>([]);
-    const [generalTasks, setGeneralTasks] = useState<Task[]>([]);
-    const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
+    // const [importantTasks, setImportantTasks] = useState<Task[]>([]);
+    // const [generalTasks, setGeneralTasks] = useState<Task[]>([]);
+    // const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
     
     const addToImportantList = (e: React.FormEvent) => {
       e.preventDefault();
