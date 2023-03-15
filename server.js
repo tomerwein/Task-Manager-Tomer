@@ -36,6 +36,28 @@ app.get('/register', (req, res) => {
   res.status(200).send(data.register);
 });
 
+app.put('/update-tasks', (req, res) => {
+  console.log("great!")
+  const {user, important_tasks, general_tasks, completed_tasks} = req.body;
+
+  const existingData = fs.readFileSync('src/data/db.json');
+  const data = JSON.parse(existingData);
+  const userIndex = data.register.findIndex((entry) => entry.user === user);
+
+  if (userIndex === -1) {
+    res.status(404).send({ message: 'User not found' });
+    return;
+  }
+
+  data.register[userIndex].important_tasks = important_tasks;
+  data.register[userIndex].general_tasks = general_tasks;
+  data.register[userIndex].completed_tasks = completed_tasks;
+
+  fs.writeFileSync('src/data/db.json', JSON.stringify(data));
+
+  res.status(200).send({ message: 'Tasks updated successfully!' });
+});
+
 app.post('/register', (req, res) => {
   const { user, password, important_tasks, general_tasks, completed_tasks } = req.body;
 
