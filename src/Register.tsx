@@ -56,16 +56,12 @@ const Register = () => {
             });
      
             const data = await response.json();
-            console.log(response);
-            console.log(data);
-            console.log("hello1")
             if (response.status !== 409) {
                 setSuccess(true);
                 setUser('');
                 setPassword('');
                 setMatchPassword('');
-                console.log(errorMessage)
-                console.log(success);
+
             } else{
                 setErrorMessage('Username Taken');
             }
@@ -74,7 +70,6 @@ const Register = () => {
             console.log(`err: ${err.message}`);
             if (!err?.response) {
                 setErrorMessage("No server response");
-                console.log(errorMessage);
             } else if (err.response?.status === 409) {
                 setErrorMessage('Username Taken');
             } else {

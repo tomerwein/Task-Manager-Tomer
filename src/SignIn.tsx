@@ -78,6 +78,7 @@ const SignIn = () => {
 
     return (
         userAllowToEnterTaskManager ? <TaskManager
+        username={user}
         importantTasks={importantTasks}
         setImportantTasks={setImportantTasks}
         generalTasks={generalTasks}

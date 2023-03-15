@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Input from './components/Input';
 import Task from './taskInfo';
 import TaskList from './components/TaskList';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
-/* tomer */
+const UPDATE_URL: string = 'http://localhost:3500/update-tasks';
+
 interface Props {
+  username: string,
   importantTasks: Task[],
   setImportantTasks: React.Dispatch<React.SetStateAction<Task[]>>,
   generalTasks: Task[],
@@ -15,18 +17,59 @@ interface Props {
   setCompletedTasks: React.Dispatch<React.SetStateAction<Task[]>>
 }
 
-// React.FC --> I deleted this
-/* tomer */
 
 const TaskManager = ({
+  username,
   importantTasks, setImportantTasks,
   generalTasks, setGeneralTasks,
   completedTasks, setCompletedTasks,
 }: Props) => {
     const [task, setTask] = useState<string>("");
-    // const [importantTasks, setImportantTasks] = useState<Task[]>([]);
-    // const [generalTasks, setGeneralTasks] = useState<Task[]>([]);
-    // const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
+    console.log(username)
+    
+    const updateTaskListsInDataBase = async (e: React.SyntheticEvent) => {
+      e.preventDefault();
+    
+      try {
+        const response = await fetch(UPDATE_URL, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user: username,
+            important_tasks: importantTasks,
+            general_tasks: generalTasks,
+            completed_tasks: completedTasks,
+          }),
+        });
+    
+        const data = await response.json();
+    
+        if (response.status === 200) {
+          console.log('Tasks updated successfully');
+        } else {
+          console.error(`Error updating tasks: ${data.message}`);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+  }
+
+    useEffect(() => {
+      const handleBeforeUnload = async (e: BeforeUnloadEvent) => {
+        console.log('Page is being refreshed');
+        await updateTaskListsInDataBase(e as unknown as React.SyntheticEvent);
+      };
+
+      window.addEventListener('beforeunload', handleBeforeUnload);
+
+      return () => {
+        console.log('App is off');
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+      };
+    }, []); 
+
     
     const addToImportantList = (e: React.FormEvent) => {
       e.preventDefault();
