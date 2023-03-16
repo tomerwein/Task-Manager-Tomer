@@ -37,7 +37,7 @@ const Input = ({ task, setTask, addToImportantList, addToGeneralList }: Props) =
       >
       </textarea>
 
-      <button className='input_button_1'
+      <button className='input_button_to_general'
         onClick={(e) => {
           addToGeneralList(e);
           inputRef.current?.blur();
@@ -45,7 +45,7 @@ const Input = ({ task, setTask, addToImportantList, addToGeneralList }: Props) =
         Add to general
       </button>
 
-      <button className='input_button_2'
+      <button className='input_button_to_important'
         onClick={(e) => {
           addToImportantList(e);
           inputRef.current?.blur();
