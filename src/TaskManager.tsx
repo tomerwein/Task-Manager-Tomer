@@ -4,6 +4,7 @@ import Input from './components/Input';
 import Task from './taskInfo';
 import TaskList from './components/TaskList';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import SignIn from './SignIn';
 
 const UPDATE_URL: string = 'http://localhost:3500/update-tasks';
 
@@ -24,6 +25,7 @@ const TaskManager = ({
 }: Props) => {
     const [task, setTask] = useState<string>("");
     const [dragFinished, setDragFinished] = useState<boolean>(false);
+    const [logout, setLogout] = useState<boolean>(false);
     
     const updateTaskListsInDataBase = async () => { 
       try {
@@ -121,9 +123,14 @@ const TaskManager = ({
     }
   
     return (
+      logout ? <SignIn/> :
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="App">
-          <span className="heading"> Task Manager </span>
+            <span className="heading"> Task Manager </span>
+            <div className='logout_container'>
+              <span className="username"> {username} </span>
+              <button className='logout' onClick={() => setLogout(true)}>Logout</button>
+            </div>
           <Input task={task} setTask={setTask} addToImportantList={addToImportantList} addToGeneralList={addToGeneralList} />
           <TaskList
             importantTasks={importantTasks}
