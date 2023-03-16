@@ -16,8 +16,6 @@ interface Props {
   completedTasks: Task[],
   setCompletedTasks: React.Dispatch<React.SetStateAction<Task[]>>
 }
-
-
 const TaskManager = ({
   username,
   importantTasks, setImportantTasks,
@@ -25,11 +23,9 @@ const TaskManager = ({
   completedTasks, setCompletedTasks,
 }: Props) => {
     const [task, setTask] = useState<string>("");
-    console.log(username)
+    const [dragFinished, setDragFinished] = useState<boolean>(false);
     
-    const updateTaskListsInDataBase = async (e: React.SyntheticEvent) => {
-      e.preventDefault();
-    
+    const updateTaskListsInDataBase = async () => { 
       try {
         const response = await fetch(UPDATE_URL, {
           method: 'PUT',
@@ -55,40 +51,35 @@ const TaskManager = ({
         console.error('Error:', error);
       }
   }
-
-    useEffect(() => {
-      const handleBeforeUnload = async (e: BeforeUnloadEvent) => {
-        console.log('Page is being refreshed');
-        await updateTaskListsInDataBase(e as unknown as React.SyntheticEvent);
-      };
-
-      window.addEventListener('beforeunload', handleBeforeUnload);
-
-      return () => {
-        console.log('App is off');
-        window.removeEventListener('beforeunload', handleBeforeUnload);
-      };
-    }, []); 
-
+  useEffect(() => {
+    updateTaskListsInDataBase();
+    if(dragFinished){
+      setDragFinished(false);
+    }
+  }, [importantTasks, generalTasks, completedTasks, dragFinished]);
     
-    const addToImportantList = (e: React.FormEvent) => {
+    const addToImportantList = async (e: React.FormEvent) => {
       e.preventDefault();
       if (task){
+        console.log("hello")
         setImportantTasks([...importantTasks, {id: Date.now(), task: task, type: "important", isDone: false}]);
         setTask("");
       } 
     }
   
-    const addToGeneralList = (e: React.FormEvent) => {
+    const addToGeneralList = async (e: React.FormEvent) => {
       e.preventDefault();
       if (task){
+        console.log("hello2")
         setGeneralTasks([...generalTasks, {id: Date.now(), task: task, type: "general", isDone: false}]);
         setTask("");
       } 
+
     }
   
     const onDragEnd = (result: DropResult) => {
       const {source, destination} = result;
+      setDragFinished(true);
       
       if (!destination) return;
   

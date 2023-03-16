@@ -7,7 +7,7 @@ import Register from "./Register";
 import TaskManager from "./TaskManager";
 import Task from "./taskInfo";
 
-const REGISTER_URL: string = 'http://localhost:3500/register';
+const SIGNIN_URL: string = 'http://localhost:3500/signin';
 
 const SignIn = () => {
     const [importantTasks, setImportantTasks] = useState<Task[]>([]);
@@ -37,7 +37,7 @@ const SignIn = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`${REGISTER_URL}?user=${user}&password=${password}`, {
+            const response = await fetch(`${SIGNIN_URL}?user=${user}&password=${password}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'

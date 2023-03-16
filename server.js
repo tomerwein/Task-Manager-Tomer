@@ -12,7 +12,7 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-app.get('/register', (req, res) => {
+app.get('/signin', (req, res) => {
   const { user, password } = req.query;
   const existingData = fs.readFileSync('src/data/db.json');
   const data = JSON.parse(existingData);
@@ -37,8 +37,9 @@ app.get('/register', (req, res) => {
 });
 
 app.put('/update-tasks', (req, res) => {
-  console.log("great!")
   const {user, important_tasks, general_tasks, completed_tasks} = req.body;
+  console.log(user)
+  console.log(important_tasks)
 
   const existingData = fs.readFileSync('src/data/db.json');
   const data = JSON.parse(existingData);
