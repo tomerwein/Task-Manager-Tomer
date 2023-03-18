@@ -185,7 +185,7 @@ input[type="text"], input[type="password"]{
 }
 
 .check_in_button:hover {
-    color: #9d06e9; ;
+    color: #9d06e9;
   }
 
 .check_in_button:active {
@@ -255,6 +255,13 @@ input[type="text"], input[type="password"]{
     background: #ed0000;
     color: #fff;
     padding: 0.25rem;
+}
+
+.sumbit_signin {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    
 }
 
 

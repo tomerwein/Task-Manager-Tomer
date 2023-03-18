@@ -33,7 +33,7 @@ const SignIn = () => {
         setErrorMessage('');
     }, [])
 
-    const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
@@ -89,7 +89,10 @@ const SignIn = () => {
         <div className="register_box">
             <div className="border_the_login">
         <span className="sign_in_heading"> Login </span>    
-            <span className="username"> Username: </span>     
+            <span className="username_signin"> Username: </span>
+
+            <form onSubmit={handleSubmit} className="sumbit_signin">
+
             <div className="user_container"> 
                 <input
                     type="text"
@@ -106,9 +109,8 @@ const SignIn = () => {
                 />        
             </div>
 
-
             <span className="password"> Password: </span>
-            
+
             <div className="password_container">
                 <input
                     type="password"
@@ -121,12 +123,14 @@ const SignIn = () => {
                     onFocus={() => setPasswordFocus(true)}
                     onBlur={() => setPasswordFocus(false)}
                 />
-            </div>          
-            
-            <button className="sign_in_button"
-            onClick={handleSubmit}>
+            </div>  
+
+            <button className="sign_in_button" type="submit">
                 Login
             </button>
+
+            </form>   
+  
 
             <p className={errorMessage === "Username is not exist" ?
                 "error_message" : "clean_screen"}>
