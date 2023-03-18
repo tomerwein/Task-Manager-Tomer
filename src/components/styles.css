@@ -211,7 +211,7 @@
 }
 
 .logout {
-  color: rgb(214, 31, 31);
+  color: rgb(0, 38, 255);
   font-family: 'Solitero', cursive;
   background-color: transparent;
   cursor: pointer;
@@ -235,6 +235,8 @@
 
 .username{
   margin-bottom: -8px;
+  font-family: 'Solitero', cursive;
+  color: rgb(0, 38, 255);
 }
 
 @media (max-width: 1100px) {

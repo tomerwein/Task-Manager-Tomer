@@ -88,67 +88,69 @@ const SignIn = () => {
         notRegister ? <Register/> :
         <div className="register_box">
             <div className="border_the_login">
-        <span className="sign_in_heading"> Login </span>    
-            <span className="username_signin"> Username: </span>
+        
 
-            <form onSubmit={handleSubmit} className="sumbit_signin">
+            <form onSubmit={handleSubmit} className="submit_signin">
 
-            <div className="user_container"> 
-                <input
-                    type="text"
-                    id="username"
-                    ref={userRef}
-                    autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
-                    required
-                    aria-invalid={validName ? "false" : "true"}
-                    aria-describedby="user_instructions"
-                    onFocus={() => setUserFocus(true)}
-                    onBlur={() => setUserFocus(false)}
-                />        
-            </div>
+                <span className="sign_in_heading"> Login </span>    
+                <span className="username_signin"> Username: </span>
 
-            <span className="password"> Password: </span>
+                <div className="user_container"> 
+                    <input
+                        type="text"
+                        id="username"
+                        ref={userRef}
+                        autoComplete="off"
+                        onChange={(e) => setUser(e.target.value)}
+                        value={user}
+                        required
+                        aria-invalid={validName ? "false" : "true"}
+                        aria-describedby="user_instructions"
+                        onFocus={() => setUserFocus(true)}
+                        onBlur={() => setUserFocus(false)}
+                    />        
+                </div>
 
-            <div className="password_container">
-                <input
-                    type="password"
-                    id="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    required
-                    aria-invalid={isValidPassword && password ? "false" : "true"}
-                    aria-describedby="password_instruction"
-                    onFocus={() => setPasswordFocus(true)}
-                    onBlur={() => setPasswordFocus(false)}
-                />
-            </div>  
+                <span className="password"> Password: </span>
 
-            <button className="sign_in_button" type="submit">
-                Login
-            </button>
+                <div className="password_container">
+                    <input
+                        type="password"
+                        id="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        required
+                        aria-invalid={isValidPassword && password ? "false" : "true"}
+                        aria-describedby="password_instruction"
+                        onFocus={() => setPasswordFocus(true)}
+                        onBlur={() => setPasswordFocus(false)}
+                    />
+                </div>  
 
-            </form>   
-  
+                <button className="sign_in_button" type="submit">
+                    Login
+                </button>
+    
+    
 
-            <p className={errorMessage === "Username is not exist" ?
-                "error_message" : "clean_screen"}>
-                <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "8px" }}/>
-                    User name is not exist, try again! <br />       
-            </p> 
+                <p className={errorMessage === "Username is not exist" ?
+                    "error_message" : "clean_screen"}>
+                    <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "8px" }}/>
+                        User name is not exist, try again! <br />       
+                </p> 
 
-            <p className={errorMessage === "Wrong password" ?
-                "error_message" : "clean_screen"}>
-                <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "8px" }}/>
-                    Oops password is wrong <br />       
-            </p>
+                <p className={errorMessage === "Wrong password" ?
+                    "error_message" : "clean_screen"}>
+                    <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "8px" }}/>
+                        Oops password is wrong <br />       
+                </p>
 
-            <p className={errorMessage === "Username or password is missing" ?
-                "error_message" : "clean_screen"}>
-                <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "8px" }}/>
-                    Username or password is missing <br />       
-            </p>  
+                <p className={errorMessage === "Username or password is missing" ?
+                    "error_message" : "clean_screen"}>
+                    <FontAwesomeIcon icon={faTriangleExclamation} style={{ paddingRight: "8px" }}/>
+                        Username or password is missing <br />       
+                </p>  
+            </form> 
 
             <span className="register_password_container"> 
                 <button className="register_password_button" 

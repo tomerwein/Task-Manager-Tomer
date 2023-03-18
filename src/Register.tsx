@@ -42,7 +42,7 @@ const Register = () => {
         setErrorMessage('');
     }, [user, password, matchPassword]) 
 
-    const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
@@ -84,7 +84,8 @@ const Register = () => {
         <div className="register_box">
             <div className="border_the_register">
         <span className="register_heading"> Register </span>    
-            <span className="username"> Username: </span>     
+            <span className="username_register"> Username: </span>     
+            <form onSubmit={handleSubmit} className='submit_register'>
             <div className="user_container"> 
                 <input
                     type="text"
@@ -184,11 +185,13 @@ const Register = () => {
 
             </div>           
             
-            <button className="sign_up_button" 
-                disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}
-                onClick={handleSubmit}>
+            <button className="sign_up_button" type="submit"
+                disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}>
+                 {/* onClick={handleSubmit} */}
                 Create account
             </button>
+
+            </form>
 
             <p className={errorMessage === "Username Taken" ?
                 "error_message" : "clean_screen"}>
