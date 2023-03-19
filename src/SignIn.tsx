@@ -52,6 +52,12 @@ const SignIn = () => {
                 setGeneralTasks (userDetails.general_tasks);
                 setCompletedTasks(userDetails.completed_tasks);
                 setUserAllowToEnterTaskManager(true);
+
+                localStorage.setItem("loggedInUser", JSON.stringify({
+                     username: user, importantTasks: importantTasks,
+                      generalTasks: generalTasks, completedTasks: completedTasks }));
+
+
             } else if (response.status === 403){
                 console.log("user or password");
                 setErrorMessage('Username or password is missing');

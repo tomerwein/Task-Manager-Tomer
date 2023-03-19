@@ -129,9 +129,16 @@ const TaskManager = ({
             <span className="heading"> Task Manager </span>
             <div className='logout_container'>
               <span className="username"> {username} </span>
-              <button className='logout' onClick={() => setLogout(true)}>Logout</button>
+              <button className='logout' 
+              onClick={() => {setLogout(true);
+                localStorage.removeItem("loggedInUser");}}>
+                Logout</button>
             </div>
-          <Input task={task} setTask={setTask} addToImportantList={addToImportantList} addToGeneralList={addToGeneralList} />
+
+          <Input task={task} setTask={setTask}
+           addToImportantList={addToImportantList} 
+           addToGeneralList={addToGeneralList} />
+          
           <TaskList
             importantTasks={importantTasks}
             setImportantTasks={setImportantTasks}
@@ -140,6 +147,7 @@ const TaskManager = ({
             completedTasks={completedTasks}
             setCompletedTasks={setCompletedTasks}
           />
+        
         </div>
       </DragDropContext>
     );
