@@ -53,6 +53,8 @@ const SignIn = () => {
                 setCompletedTasks(userDetails.completed_tasks);
                 setUserAllowToEnterTaskManager(true);
 
+                console.log(`checked" ${importantTasks}`)
+
                 localStorage.setItem("loggedInUser", JSON.stringify({
                      username: user, importantTasks: importantTasks,
                       generalTasks: generalTasks, completedTasks: completedTasks }));

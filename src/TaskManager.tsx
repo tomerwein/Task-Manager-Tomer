@@ -17,6 +17,7 @@ interface Props {
   completedTasks: Task[],
   setCompletedTasks: React.Dispatch<React.SetStateAction<Task[]>>
 }
+
 const TaskManager = ({
   username,
   importantTasks, setImportantTasks,
@@ -46,6 +47,7 @@ const TaskManager = ({
     
         if (response.status === 200) {
           console.log('Tasks updated successfully');
+          updateLocalStorage();
         } else {
           console.error(`Error updating tasks: ${data.message}`);
         }
@@ -53,11 +55,13 @@ const TaskManager = ({
         console.error('Error:', error);
       }
   }
+
   useEffect(() => {
     updateTaskListsInDataBase();
     if(dragFinished){
       setDragFinished(false);
     }
+    updateLocalStorage();
   }, [importantTasks, generalTasks, completedTasks, dragFinished]);
     
     const addToImportantList = async (e: React.FormEvent) => {
@@ -121,6 +125,15 @@ const TaskManager = ({
      setGeneralTasks(general);
      setCompletedTasks(complete);
     }
+
+    const updateLocalStorage = () => {
+      localStorage.setItem("loggedInUser", JSON.stringify({
+        username: username,
+        importantTasks: importantTasks,
+        generalTasks: generalTasks,
+        completedTasks: completedTasks
+      }));
+    }
   
     return (
       logout ? <SignIn/> :
@@ -129,10 +142,13 @@ const TaskManager = ({
             <span className="heading"> Task Manager </span>
             <div className='logout_container'>
               <span className="username"> {username} </span>
+              
               <button className='logout' 
               onClick={() => {setLogout(true);
-                localStorage.removeItem("loggedInUser");}}>
-                Logout</button>
+                localStorage.removeItem("loggedInUser");
+                }}>
+                Logout
+              </button>
             </div>
 
           <Input task={task} setTask={setTask}
