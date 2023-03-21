@@ -1,6 +1,7 @@
 import "./components/registerStyles.css" 
 import { useRef, useState, useEffect } from "react";
-import {faCircleCheck, faCircleXmark, faCircleQuestion, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
+import {faCircleCheck, faCircleXmark, faCircleQuestion, faTriangleExclamation, faEye, faEyeSlash} 
+from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 import SignIn from "./SignIn";
@@ -13,6 +14,10 @@ const REGISTER_URL: string = 'http://localhost:3500/register';
 
 const Register = () => {
     const [checkIn, setCheckIn] = useState(false)
+    
+    const [showPassword, setShowPassword] = useState(false);
+    const [showMatchedPassword, setShowMatchedPassword] = useState(false);
+
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -124,7 +129,7 @@ const Register = () => {
             
             <div className="password_container">
                 <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
@@ -134,6 +139,18 @@ const Register = () => {
                     onFocus={() => setPasswordFocus(true)}
                     onBlur={() => setPasswordFocus(false)}
                 />
+
+                <FontAwesomeIcon icon={faEye}
+                    type="button"
+                    className={showPassword ? "hide_password_eye" : "show_password_eye"}
+                    onClick={() => setShowPassword(!showPassword)}
+                    />
+
+                <FontAwesomeIcon icon={faEyeSlash}
+                    type="button"
+                    className={showPassword ? "show_password_eye" : "hide_password_eye"}
+                    onClick={() => setShowPassword(!showPassword)}
+                    />
 
                 <span className="icon_password">
                     <FontAwesomeIcon icon={faCircleCheck}
@@ -152,14 +169,11 @@ const Register = () => {
 
             </div>
 
-                
-
-
             <span className="matchPasswords"> Confirm password: </span>
             
             <div className="match_container">
                 <input
-                    type="password"
+                    type={showMatchedPassword ? "text" : "password"}
                     id="matchPasswords"
                     onChange={(e) => setMatchPassword(e.target.value)}
                     value={matchPassword}
@@ -169,6 +183,18 @@ const Register = () => {
                     onFocus={() => setMatchPasswordFocus(true)}
                     onBlur={() => setMatchPasswordFocus(false)}
                 />
+
+                <FontAwesomeIcon icon={faEye}
+                    type="button"
+                    className={showMatchedPassword ? "hide_password_eye" : "show_password_eye"}
+                    onClick={() => setShowMatchedPassword(!showMatchedPassword)}
+                    />
+
+                <FontAwesomeIcon icon={faEyeSlash}
+                    type="button"
+                    className={showMatchedPassword ? "show_password_eye" : "hide_password_eye"}
+                    onClick={() => setShowMatchedPassword(!showMatchedPassword)}
+                    />
                 
                 <span className="icon_match_passwords">
                     <FontAwesomeIcon icon={faCircleCheck}

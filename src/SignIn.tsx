@@ -1,12 +1,11 @@
 import "./components/registerStyles.css" 
 import { useRef, useState, useEffect } from "react";
-import {faCircleCheck, faTriangleExclamation, faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import {faTriangleExclamation, faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 import Register from "./Register";
 import TaskManager from "./TaskManager";
 import Task from "./taskInfo";
-import { AiFillEye } from "react-icons/ai";
 
 const SIGNIN_URL: string = 'http://localhost:3500/signin';
 

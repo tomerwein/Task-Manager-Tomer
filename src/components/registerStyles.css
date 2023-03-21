@@ -168,7 +168,7 @@ input[type="text"], input[type="password"]{
 
 .user_container, .password_container, .match_container {
     width: 400px;
-    padding-left: 165px;
+    margin-left: 150px;
 }
 
 .have_an_account {
