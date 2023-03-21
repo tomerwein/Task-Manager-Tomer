@@ -85,6 +85,7 @@ const Register = () => {
             <div className="border_the_register">
         <span className="register_heading"> Register </span>    
             <span className="username_register"> Username: </span>     
+            
             <form onSubmit={handleSubmit} className='submit_register'>
             <div className="user_container"> 
                 <input

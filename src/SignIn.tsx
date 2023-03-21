@@ -1,15 +1,18 @@
 import "./components/registerStyles.css" 
 import { useRef, useState, useEffect } from "react";
-import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
+import {faCircleCheck, faTriangleExclamation, faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 import Register from "./Register";
 import TaskManager from "./TaskManager";
 import Task from "./taskInfo";
+import { AiFillEye } from "react-icons/ai";
 
 const SIGNIN_URL: string = 'http://localhost:3500/signin';
 
 const SignIn = () => {
+    const [showPassword, setShowPassword] = useState(false);
+    
     const [importantTasks, setImportantTasks] = useState<Task[]>([]);
     const [generalTasks, setGeneralTasks] = useState<Task[]>([]);
     const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
@@ -123,7 +126,7 @@ const SignIn = () => {
 
                 <div className="password_container">
                     <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         id="password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
@@ -133,6 +136,18 @@ const SignIn = () => {
                         onFocus={() => setPasswordFocus(true)}
                         onBlur={() => setPasswordFocus(false)}
                     />
+                    <FontAwesomeIcon icon={faEye}
+                        type="button"
+                        className={showPassword ? "hide_password_eye" : "show_password_eye"}
+                        onClick={() => setShowPassword(!showPassword)}
+                        />
+
+                    <FontAwesomeIcon icon={faEyeSlash}
+                        type="button"
+                        className={showPassword ? "show_password_eye" : "hide_password_eye"}
+                        onClick={() => setShowPassword(!showPassword)}
+                        />
+
                 </div>  
 
                 <button className="sign_in_button" type="submit">

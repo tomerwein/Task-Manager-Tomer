@@ -87,7 +87,7 @@ input[type="text"], input[type="password"]{
     margin-left: 0.25rem;
 }
 
-.hide_v, .hide_x {
+.hide_v, .hide_x, .hide_password_eye{
     display: none;
 }
 
@@ -267,6 +267,20 @@ input[type="text"], input[type="password"]{
     display: flex; 
     flex-direction: column; 
     align-items: center; 
+}
+
+.show_password_eye{
+    background: none;
+    border: solid;
+    border-color: #000000;
+    border-radius: 8px;
+    cursor: pointer;
+    right: 10px;
+    top: 5px;
+    position: relative;
+    
+    font-size: 0.9rem;
+    color: #2f00ff;
 }
 
 
