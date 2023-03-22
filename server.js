@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import fs from 'fs';
+import argon2 from 'argon2';
 
 const app = express();
 const port = 3500;
@@ -12,7 +13,7 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-app.get('/signin', (req, res) => {
+app.get('/signin', async (req, res) => {
   const { user, password } = req.query;
   const existingData = fs.readFileSync('src/data/db.json');
   const data = JSON.parse(existingData);
@@ -21,13 +22,13 @@ app.get('/signin', (req, res) => {
     res.status(403).send({message: 'username or password is missing'})
   }
   
-  const userExists = data.register.some((entry) => entry.user === user);
-  if (!userExists){
+  const userEntry = data.register.find((entry) => entry.user === user);
+  if (!userEntry){
     res.status(404).send({message: 'User is not exist'});
     return;
   }
 
-  const passwordCorrect = data.register.some((entry) => entry.user === user && entry.password == password);
+  const passwordCorrect = await argon2.verify(userEntry.password, password);
   if (!passwordCorrect){
     res.status(401).send({message: 'Password is not correct'});
     return;
@@ -59,7 +60,7 @@ app.put('/update-tasks', (req, res) => {
   res.status(200).send({ message: 'Tasks updated successfully!' });
 });
 
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
   const { user, password, important_tasks, general_tasks, completed_tasks } = req.body;
 
   const existingData = fs.readFileSync('src/data/db.json');
@@ -72,7 +73,9 @@ app.post('/register', (req, res) => {
     return;
   }
 
-  data.register.push({user, password, important_tasks, general_tasks, completed_tasks});
+  const hashedPassword = await argon2.hash(password);
+
+  data.register.push({user, password:hashedPassword, important_tasks, general_tasks, completed_tasks});
 
   fs.writeFileSync('src/data/db.json', JSON.stringify(data));
 
