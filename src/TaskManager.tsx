@@ -28,7 +28,7 @@ const TaskManager = ({
     const [dragFinished, setDragFinished] = useState<boolean>(false);
     const [logout, setLogout] = useState<boolean>(false);
     
-    const updateTaskListsInDataBase = async () => { 
+    const handleUpdateTaskListsInDataBase = async () => { 
       try {
         const response = await fetch(UPDATE_URL, {
           method: 'PUT',
@@ -57,7 +57,7 @@ const TaskManager = ({
   }
 
   useEffect(() => {
-    updateTaskListsInDataBase();
+    handleUpdateTaskListsInDataBase();
     if(dragFinished){
       setDragFinished(false);
     }

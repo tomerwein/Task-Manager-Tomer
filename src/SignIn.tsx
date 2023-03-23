@@ -35,7 +35,7 @@ const SignIn = () => {
         setErrorMessage('');
     }, [])
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
@@ -100,7 +100,7 @@ const SignIn = () => {
             <div className="border_the_login">
         
 
-            <form onSubmit={handleSubmit} className="submit_signin">
+            <form onSubmit={handleSignIn} className="submit_signin">
 
                 <span className="sign_in_heading"> Login </span>    
                 <span className="username_signin"> Username: </span>
