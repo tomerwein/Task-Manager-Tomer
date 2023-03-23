@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Rubik&family=Solitreo&display=swap');
+
 .input {
+    font-family: "Rubik", cursive;
     display: flex;
     width: 95%;
     position: relative;
@@ -7,6 +10,7 @@
   }
   
 .input_box {
+  letter-spacing: -0.5px;
   width: 100%;
   border-radius: 50px;
   padding: 15px 30px 5px 30px;
@@ -142,14 +146,11 @@
 }
 
 .single_task_box {
+  font-family: "Rubik", cursive;
   flex: 1;
   padding: 5px;
   border: none;
   font-size: 20px;
-}
-
-.single_task_text{    
-  margin-right: 15px
 }
 
 .icon {
@@ -164,6 +165,8 @@
 }
 
 .single_task_text {
+  background-color: transparent;
+  transition: all;
   flex: 1;
   padding: 5px;
   border: none;

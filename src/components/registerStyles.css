@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Solitreo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Neucha&family=Rubik&family=Solitreo&display=swap');
 
 .register_heading, .sign_in_heading {
     text-transform: uppercase;
@@ -168,7 +168,7 @@ input[type="text"], input[type="password"]{
 
 .user_container, .password_container, .match_container {
     width: 400px;
-    margin-left: 150px;
+    margin-left: 165px;
 }
 
 .have_an_account {
@@ -282,5 +282,4 @@ input[type="text"], input[type="password"]{
     font-size: 0.9rem;
     color: #2f00ff;
 }
-
 

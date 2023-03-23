@@ -31,7 +31,6 @@ const Input = ({ task, setTask, addToImportantList, addToGeneralList }: Props) =
           if (e.key === "Enter") {
             e.preventDefault();
             addToGeneralList(e);
-            inputRef.current?.blur();
           }
         }}
       >
@@ -40,7 +39,7 @@ const Input = ({ task, setTask, addToImportantList, addToGeneralList }: Props) =
       <button className='input_button_to_general'
         onClick={(e) => {
           addToGeneralList(e);
-          inputRef.current?.blur();
+          // inputRef.current?.focus();
         }}>
         Add to general
       </button>
@@ -48,7 +47,7 @@ const Input = ({ task, setTask, addToImportantList, addToGeneralList }: Props) =
       <button className='input_button_to_important'
         onClick={(e) => {
           addToImportantList(e);
-          inputRef.current?.blur();
+          // inputRef.current?.focus();
         }}>
         Add to important
       </button>
