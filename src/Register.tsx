@@ -1,12 +1,11 @@
 import "./components/registerStyles.css" 
 import { useRef, useState, useEffect } from "react";
-import {faCircleCheck, faCircleXmark, faCircleQuestion, faTriangleExclamation, faEye, faEyeSlash} 
+import {faCircleCheck, faCircleXmark, faCircleQuestion, faTriangleExclamation, faEye, faEyeSlash, faExclamationTriangle} 
 from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 import SignIn from "./SignIn";
 import RegisterSucceed from "./RegisterSucceed";
-import Task from "./taskInfo";
 
 const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}$/;
 const PASSWORD_REGEX: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?^*!@#$%]).{8,24}$/;
@@ -60,13 +59,8 @@ const Register = () => {
                     important_tasks: [], general_tasks: [], completed_tasks: [] })
             });
      
-            const data = await response.json();
             if (response.status !== 409) {
                 setSuccess(true);
-                setUser('');
-                setPassword('');
-                setMatchPassword('');
-
             } else{
                 setErrorMessage('Username Taken');
             }
@@ -85,7 +79,10 @@ const Register = () => {
 
     return (
         checkIn ? <SignIn/> :
-        success ? <RegisterSucceed/> :
+        success ? <RegisterSucceed 
+        user={user}
+        password={password}
+        /> :
         <div className="register_box">
             <div className="border_the_register">
         <span className="register_heading"> Register </span>    
@@ -118,8 +115,8 @@ const Register = () => {
                     className={userFocus && user && !validName ? "info_if_not_valid" : "clean_screen"}>
                     <FontAwesomeIcon icon={faCircleQuestion} />
                     You must enter 4 to 24 characters.<br />
-                    Must begin with a letter.<br />
-                    Only Letters, numbers, underscores and hyphens allowed
+                    English letters. Must begin with a letter.<br />
+                    Letters, numbers, underscores and hyphens allowed
                 </p>  
             
             </div>
@@ -153,10 +150,8 @@ const Register = () => {
                     />
 
                 <span className="icon_password">
-                    <FontAwesomeIcon icon={faCircleCheck}
-                        className={isValidPassword ? "show_v" : "hide_v"} />
-                    <FontAwesomeIcon icon={faCircleXmark}
-                        className={password && !isValidPassword ? "show_x" : "hide_x"} />
+                    <FontAwesomeIcon icon={faExclamationTriangle}
+                        className={password && !isValidPassword ? "show_exclamation" : "hide_exclamation"} />
                 </span>   
 
                 <p id="password_instruction" className={passwordFocus && !isValidPassword && password ?
@@ -197,10 +192,8 @@ const Register = () => {
                     />
                 
                 <span className="icon_match_passwords">
-                    <FontAwesomeIcon icon={faCircleCheck}
-                        className={isMatchPasswords && matchPassword ? "show_v" : "hide_v"} />
-                    <FontAwesomeIcon icon={faCircleXmark}
-                        className={matchPassword && !isMatchPasswords ? "show_x" : "hide_x"} />
+                    <FontAwesomeIcon icon={faExclamationTriangle}
+                        className={matchPassword && !isMatchPasswords ? "show_exclamation" : "hide_exclamation"} />
                 </span>
 
                 <p id="match_password_instruction" 
@@ -214,7 +207,6 @@ const Register = () => {
             
             <button className="sign_up_button" type="submit"
                 disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}>
-                 {/* onClick={handleSubmit} */}
                 Create account
             </button>
 

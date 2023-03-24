@@ -87,13 +87,18 @@ input[type="text"], input[type="password"]{
     margin-left: 0.25rem;
 }
 
-.hide_v, .hide_x, .hide_password_eye{
+.hide_v, .hide_x, .hide_password_eye, .hide_exclamation{
     display: none;
 }
 
 .show_x{
     color: red;
     margin-left: 0.25rem;
+}
+
+.show_exclamation{
+    color: rgba(255, 234, 0, 0.954);
+    margin-left: 10px;
 }
 
 .icon_user, .icon_password, .icon_match_passwords {
@@ -271,14 +276,11 @@ input[type="text"], input[type="password"]{
 
 .show_password_eye{
     background: none;
-    border: solid;
-    border-color: #000000;
-    border-radius: 8px;
     cursor: pointer;
     right: 10px;
     top: 5px;
     position: relative;
-    
+    size: 10px;
     font-size: 0.9rem;
     color: #2f00ff;
 }
