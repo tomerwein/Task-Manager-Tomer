@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Register from './Register'
 import TaskManager from './TaskManager'
 import SignIn from './SignIn'
 import Task from './taskInfo'
 
 const App: React.FC = () => {
-  const [loggedInUser, setLoggedInUser] = useState<string | null>(null);
+  const [loggedInUser, setLoggedInUser] = useState<string>('');
+  const [loading, setLoading] = useState(true);
 
   const [importantTasks, setImportantTasks] = useState<Task[]>([]);
   const [generalTasks, setGeneralTasks] = useState<Task[]>([]);
@@ -20,8 +20,12 @@ const App: React.FC = () => {
       setGeneralTasks (generalTasks);
       setCompletedTasks(completedTasks);
     }
+    setLoading(false);
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     loggedInUser ? 
