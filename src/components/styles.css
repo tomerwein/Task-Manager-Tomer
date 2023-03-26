@@ -207,31 +207,43 @@
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  right: 46%;
+  right: 45%;
   bottom: 50px;
 }
 
-@media (max-width: 1250px) {
-  .logout_container {
-    right: 45%; 
-  }
-}
-
-@media (max-width: 1100px) {
+@media (max-width: 1300px) {
   .logout_container {
     right: 44%; 
   }
 }
 
-@media (max-width: 920px) {
+@media (max-width: 1200px) {
   .logout_container {
     right: 43%; 
   }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 1100px) {
   .logout_container {
     right: 42%; 
+  }
+}
+
+@media (max-width: 970px) {
+  .logout_container {
+    right: 41%; 
+  }
+}
+
+@media (max-width: 880px) {
+  .logout_container {
+    right: 40%; 
+  }
+}
+
+@media (max-width: 750px) {
+  .logout_container {
+    right: 39%; 
   }
 }
 
