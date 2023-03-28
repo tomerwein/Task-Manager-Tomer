@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import Task from './components/taskInfo';
 import TaskManager from './TaskManager';
 
@@ -21,7 +21,7 @@ const RegisterSucceed: React.FC<Props> = ({user, password}) => {
     
     const [checkIn, setCheckIn] = useState(false);
     
-    const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSignIn = useCallback (async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
@@ -73,7 +73,7 @@ const RegisterSucceed: React.FC<Props> = ({user, password}) => {
                 setErrorMessage('Registration Failed')
             }
         }  
-    }
+    }, [user, password, importantTasks, generalTasks, completedTasks, errorMessage]);
 
 
     useEffect(() => {
@@ -92,7 +92,7 @@ const RegisterSucceed: React.FC<Props> = ({user, password}) => {
           return () => {
             window.removeEventListener('keydown', handleKeyPress);
           };
-        }, [checkIn]);
+        }, [checkIn, handleSignIn]);
 
 
     return (

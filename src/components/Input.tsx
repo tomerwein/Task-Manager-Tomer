@@ -47,7 +47,7 @@ const Input = ({ task, setTask, addToImportantList, addToGeneralList }: Props) =
         onClick={(e) => {
           addToImportantList(e);
         }}>
-        Add to importanty
+        Add to important
       </button>
 
     </form>
