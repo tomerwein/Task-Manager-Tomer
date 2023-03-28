@@ -21,11 +21,15 @@ const SignIn = () => {
     const [notRegister, setNotRegister] = useState(false);
 
     const [user, setUser] = useState('');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [validName, setValidName] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [userFocus, setUserFocus] = useState(false);
 
     const [password, setPassword] = useState('');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isValidPassword, setIsValidPwd] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [passwordFocus, setPasswordFocus] = useState(false);
     
     const userRef = useRef<HTMLInputElement>(null);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './App.css';
 import Input from './components/Input';
 import Task from './components/taskInfo';
@@ -28,7 +28,16 @@ const TaskManager = ({
     const [dragFinished, setDragFinished] = useState<boolean>(false);
     const [logout, setLogout] = useState<boolean>(false);
     
-    const handleUpdateTaskListsInDataBase = async () => { 
+    const updateLocalStorage = useCallback(() => {
+      localStorage.setItem("loggedInUser", JSON.stringify({
+        username: username,
+        importantTasks: importantTasks,
+        generalTasks: generalTasks,
+        completedTasks: completedTasks
+      }));
+    }, [username, importantTasks, generalTasks, completedTasks]);
+
+    const handleUpdateTaskListsInDataBase = useCallback(async () => {
       try {
         const response = await fetch(UPDATE_URL, {
           method: 'PUT',
@@ -42,9 +51,9 @@ const TaskManager = ({
             completed_tasks: completedTasks,
           }),
         });
-    
+  
         const data = await response.json();
-    
+  
         if (response.status === 200) {
           console.log('Tasks updated successfully');
           updateLocalStorage();
@@ -54,15 +63,14 @@ const TaskManager = ({
       } catch (error) {
         console.error('Error:', error);
       }
-  }
-
-  useEffect(() => {
-    handleUpdateTaskListsInDataBase();
-    if(dragFinished){
-      setDragFinished(false);
-    }
-    updateLocalStorage();
-  }, [importantTasks, generalTasks, completedTasks, dragFinished]);
+    }, [importantTasks, generalTasks, completedTasks, username, updateLocalStorage]);
+  
+    useEffect(() => {
+      handleUpdateTaskListsInDataBase();
+      if (dragFinished) {
+        setDragFinished(false);
+      }
+    }, [importantTasks, generalTasks, completedTasks, dragFinished, handleUpdateTaskListsInDataBase]);
     
     const addToImportantList = async (e: React.FormEvent) => {
       e.preventDefault();
@@ -124,15 +132,6 @@ const TaskManager = ({
      setImportantTasks(important); 
      setGeneralTasks(general);
      setCompletedTasks(complete);
-    }
-
-    const updateLocalStorage = () => {
-      localStorage.setItem("loggedInUser", JSON.stringify({
-        username: username,
-        importantTasks: importantTasks,
-        generalTasks: generalTasks,
-        completedTasks: completedTasks
-      }));
     }
   
     return (

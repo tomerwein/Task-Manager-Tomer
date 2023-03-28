@@ -47,9 +47,9 @@ const CompletedTask = ({index, task, tasks, setTasks, generalTasks, setGeneralTa
         e.preventDefault();
         setTasks(tasks.map((task) => task.id === id?
          {...task, task:editText} : task));     
-        {
-            setEditClicked(false)
-        }
+        
+        setEditClicked(false)
+        
     }
 
     const handleDoubleClick = () => {

@@ -30,9 +30,10 @@ const SingleTask = ({index, task, tasks, setTasks, completedTasks, setCompletedT
 
     const approveEdit = (e: React.FormEvent ,id:number) => {
         e.preventDefault();
-        setTasks(tasks.map((task) => (task.id === id?
+        setTasks(
+            tasks.map((task) => (task.id === id ?
          {...task, task:editText} : task)))     
-         {setEditClicked(false)}
+         setEditClicked(false)
     }
     
     const inputRef = useRef<HTMLInputElement>(null);
@@ -47,20 +48,6 @@ const SingleTask = ({index, task, tasks, setTasks, completedTasks, setCompletedT
             setEditClicked(!isEditClicked);
         }
     }
-
-    // const handleClickOutside = (e: MouseEvent) => {
-    //     const target = e.target as HTMLElement;
-    //     if (inputRef.current && !inputRef.current.contains(target) && isEditClicked) {
-    //         setEditClicked(false);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     document.addEventListener('mousedown', handleClickOutside);
-    //     return () => {
-    //         document.removeEventListener('mousedown', handleClickOutside);
-    //     };
-    // }, [handleClickOutside]);
 
     const handleClickOutside = useCallback((e: MouseEvent) => {
         const target = e.target as HTMLElement;
