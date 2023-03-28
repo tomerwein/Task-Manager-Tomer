@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Task from '../taskInfo'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import Task from './taskInfo'
 import {GrEdit, GrReturn} from 'react-icons/gr'
 import {AiTwotoneDelete} from 'react-icons/ai'
 import './styles.css'
@@ -19,7 +19,7 @@ type Props = {
 const CompletedTask = ({index, task, tasks, setTasks, generalTasks, setGeneralTasks,
     importatTasks, setImportantTasks} : Props)  => {
     const [isEditClicked, setEditClicked] = useState<boolean>(false);
-    const [editText, setEditText] = useState<string>("");
+    const [editText, setEditText] = useState<string>(task.task);
 
     const backtrackTask = (id: number) => {
         tasks.forEach(() => {
@@ -64,6 +64,20 @@ const CompletedTask = ({index, task, tasks, setTasks, generalTasks, setGeneralTa
     useEffect(() => {
       inputRef.current?.focus();
     }, [isEditClicked])
+
+    const handleClickOutside = useCallback((e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (inputRef.current && !inputRef.current.contains(target) && isEditClicked) {
+          setEditClicked(false);
+      }
+    }, [isEditClicked, inputRef]);
+  
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [handleClickOutside]);
 
     return (
         <Draggable draggableId={task.id.toString()} index={index}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TaskManager from './TaskManager'
 import SignIn from './SignIn'
-import Task from './taskInfo'
+import Task from './components/taskInfo'
 
 const App: React.FC = () => {
   const [loggedInUser, setLoggedInUser] = useState<string>('');

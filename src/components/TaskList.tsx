@@ -1,6 +1,6 @@
 import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
-import Task from '../taskInfo';
+import Task from './taskInfo';
 import CompletedTask from './CompletedTask';
 import SingleTask from './SingleTask';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Input from './components/Input';
-import Task from './taskInfo';
+import Task from './components/taskInfo';
 import TaskList from './components/TaskList';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import SignIn from './SignIn';

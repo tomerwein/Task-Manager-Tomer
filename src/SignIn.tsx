@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./App.css"
 import Register from "./Register";
 import TaskManager from "./TaskManager";
-import Task from "./taskInfo";
+import Task from "./components/taskInfo";
 
 const SIGNIN_URL: string = 'http://localhost:3500/signin';
 
