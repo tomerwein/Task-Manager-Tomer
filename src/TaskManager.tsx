@@ -35,7 +35,7 @@ const TaskManager = ({
         generalTasks: generalTasks,
         completedTasks: completedTasks
       }));
-    }, [username, importantTasks, generalTasks, completedTasks]);
+    }, [username, importantTasks, generalTasks, completedTasks]); 
 
     const handleUpdateTaskListsInDataBase = useCallback(async () => {
       try {
@@ -55,7 +55,6 @@ const TaskManager = ({
         const data = await response.json();
   
         if (response.status === 200) {
-          console.log('Tasks updated successfully');
           updateLocalStorage();
         } else {
           console.error(`Error updating tasks: ${data.message}`);
@@ -75,7 +74,6 @@ const TaskManager = ({
     const addToImportantList = async (e: React.FormEvent) => {
       e.preventDefault();
       if (task){
-        console.log("hello")
         setImportantTasks([...importantTasks, {id: Date.now(), task: task, type: "important", isDone: false}]);
         setTask("");
       } 
@@ -84,7 +82,6 @@ const TaskManager = ({
     const addToGeneralList = async (e: React.FormEvent) => {
       e.preventDefault();
       if (task){
-        console.log("hello2")
         setGeneralTasks([...generalTasks, {id: Date.now(), task: task, type: "general", isDone: false}]);
         setTask("");
       } 

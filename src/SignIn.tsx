@@ -59,21 +59,16 @@ const SignIn = () => {
                 setCompletedTasks(userDetails.completed_tasks);
                 setUserAllowToEnterTaskManager(true);
 
-                console.log(`checked" ${importantTasks}`)
-
                 localStorage.setItem("loggedInUser", JSON.stringify({
                      username: user, importantTasks: importantTasks,
                       generalTasks: generalTasks, completedTasks: completedTasks }));
 
 
             } else if (response.status === 403){
-                console.log("user or password");
                 setErrorMessage('Username or password is missing');
             } else if (response.status === 404){
-                console.log("user name");
                 setErrorMessage('Username is not exist');
             } else if (response.status === 401) {
-                console.log("passowrd");
                 setErrorMessage('Wrong password');
             }
                 
@@ -81,7 +76,6 @@ const SignIn = () => {
             console.log(`err: ${err.message}`);
             if (!err?.response) {
                 setErrorMessage("No server response");
-                console.log(errorMessage);
             } else if (err.response?.status === 409) {
                 setErrorMessage('Username Taken');
             } else {

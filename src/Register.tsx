@@ -147,9 +147,10 @@ const Register = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     />
 
+                
                 <span className="icon_password">
-                    <FontAwesomeIcon icon={faExclamationTriangle}
-                        className={password && !isValidPassword ? "show_exclamation" : "hide_exclamation"} />
+                <FontAwesomeIcon icon={faExclamationTriangle}
+                    className={password && !isValidPassword ? "show_exclamation" : "hide_exclamation"} />                        
                 </span>   
 
                 <p id="password_instruction" className={validName && !isValidPassword && password ?
@@ -191,7 +192,8 @@ const Register = () => {
                 
                 <span className="icon_match_passwords">
                     <FontAwesomeIcon icon={faExclamationTriangle}
-                        className={!matchPasswordFocus && matchPassword && !isMatchPasswords ? "show_exclamation" : "hide_exclamation"} />
+                        className={!matchPasswordFocus && matchPassword && !isMatchPasswords ?
+                         "show_exclamation" : "hide_exclamation"} />
                 </span>
 
                 <p id="match_password_instruction" 

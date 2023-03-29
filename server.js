@@ -39,9 +39,6 @@ app.get('/signin', async (req, res) => {
 
 app.put('/update-tasks', (req, res) => {
   const {user, important_tasks, general_tasks, completed_tasks} = req.body;
-  console.log(user)
-  console.log(important_tasks)
-
   const existingData = fs.readFileSync('src/data/db.json');
   const data = JSON.parse(existingData);
   const userIndex = data.register.findIndex((entry) => entry.user === user);

@@ -11,7 +11,6 @@ interface Props {
   }
 
 const RegisterSucceed: React.FC<Props> = ({user, password}) => {
-    console.log(user)
     const [importantTasks, setImportantTasks] = useState<Task[]>([]);
     const [generalTasks, setGeneralTasks] = useState<Task[]>([]);
     const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
@@ -25,8 +24,6 @@ const RegisterSucceed: React.FC<Props> = ({user, password}) => {
         e.preventDefault();
 
         try {
-            console.log("hey");
-            console.log(user);
             const response = await fetch(`${SIGNIN_URL}?user=${user}&password=${password}`, {
                 method: 'GET',
                 headers: {
@@ -44,21 +41,16 @@ const RegisterSucceed: React.FC<Props> = ({user, password}) => {
 
                 setCheckIn(true);
 
-                console.log(`checked" ${importantTasks}`)
-
                 localStorage.setItem("loggedInUser", JSON.stringify({
                      username: user, importantTasks: importantTasks,
                       generalTasks: generalTasks, completedTasks: completedTasks }));
 
 
             } else if (response.status === 403){
-                console.log("user or password");
                 setErrorMessage('Username or password is missing');
             } else if (response.status === 404){
-                console.log("user name");
                 setErrorMessage('Username is not exist');
             } else if (response.status === 401) {
-                console.log("passowrd");
                 setErrorMessage('Wrong password');
             }
                 
@@ -66,7 +58,6 @@ const RegisterSucceed: React.FC<Props> = ({user, password}) => {
             console.log(`err: ${err.message}`);
             if (!err?.response) {
                 setErrorMessage("No server response");
-                console.log(errorMessage);
             } else if (err.response?.status === 409) {
                 setErrorMessage('Username Taken');
             } else {
