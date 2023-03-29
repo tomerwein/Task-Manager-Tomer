@@ -54,7 +54,7 @@ html {
 .info_if_not_valid {
     font-size: 0.75rem;
     border-radius: 0.5rem;
-    background: #000;
+    background: rgb(214, 31, 31);
     color: #fff;
     padding: 0.25rem;
     position: relative;
@@ -97,8 +97,10 @@ input[type="text"], input[type="password"]{
 }
 
 .show_exclamation{
-    color: rgba(255, 234, 0, 0.954);
+    color: rgba(255, 0, 0, 0.954);
     margin-left: 10px;
+    position: relative;
+    top: 3px;
 }
 
 .icon_user, .icon_password, .icon_match_passwords {

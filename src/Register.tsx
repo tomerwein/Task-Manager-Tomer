@@ -20,10 +20,12 @@ const Register = () => {
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [userFocus, setUserFocus] = useState(false);
 
     const [password, setPassword] = useState('');
     const [isValidPassword, setIsValidPwd] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [passwordFocus, setPasswordFocus] = useState(false);
 
     const [matchPassword, setMatchPassword] = useState('');
@@ -98,8 +100,6 @@ const Register = () => {
                     onChange={(e) => setUser(e.target.value)}
                     value={user}
                     required
-                    aria-invalid={validName ? "false" : "true"}
-                    aria-describedby="user_instructions"
                     onFocus={() => setUserFocus(true)}
                     onBlur={() => setUserFocus(false)}
                 /> 
@@ -112,7 +112,7 @@ const Register = () => {
                 </span>              
 
                 <p id="user_instructions"
-                    className={userFocus && user && !validName ? "info_if_not_valid" : "clean_screen"}>
+                    className={user && !validName ? "info_if_not_valid" : "clean_screen"}>
                     <FontAwesomeIcon icon={faCircleQuestion} />
                     You must enter 4 to 24 characters.<br />
                     English letters. Must begin with a letter.<br />
@@ -131,8 +131,6 @@ const Register = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                     required
-                    aria-invalid={isValidPassword && password ? "false" : "true"}
-                    aria-describedby="password_instruction"
                     onFocus={() => setPasswordFocus(true)}
                     onBlur={() => setPasswordFocus(false)}
                 />
@@ -154,7 +152,7 @@ const Register = () => {
                         className={password && !isValidPassword ? "show_exclamation" : "hide_exclamation"} />
                 </span>   
 
-                <p id="password_instruction" className={passwordFocus && !isValidPassword && password ?
+                <p id="password_instruction" className={validName && !isValidPassword && password ?
                     "info_if_not_valid" : "clean_screen"}>
                     <FontAwesomeIcon icon={faCircleQuestion} />
                      8 to 24 characters.<br />
@@ -193,11 +191,11 @@ const Register = () => {
                 
                 <span className="icon_match_passwords">
                     <FontAwesomeIcon icon={faExclamationTriangle}
-                        className={matchPassword && !isMatchPasswords ? "show_exclamation" : "hide_exclamation"} />
+                        className={!matchPasswordFocus && matchPassword && !isMatchPasswords ? "show_exclamation" : "hide_exclamation"} />
                 </span>
 
                 <p id="match_password_instruction" 
-                    className={matchPasswordFocus && !isMatchPasswords && matchPassword ?
+                    className={validName && isValidPassword && !isMatchPasswords && matchPassword ?
                     "info_if_not_valid" : "clean_screen"}>
                     <FontAwesomeIcon icon={faCircleQuestion} />
                     The passwords don't match<br />       
