@@ -22,7 +22,7 @@ const Input = ({ task, setTask, addToImportantList, addToGeneralList }: Props) =
         onChange={(e) => {
           setTask(e.target.value);
         }}
-        placeholder='Enter a task'
+        placeholder='Task content'
         className='input_box'
         wrap='soft'
         maxLength={500}
