@@ -13,10 +13,10 @@ const REGISTER_URL: string = 'http://localhost:3500/register';
 
 const Register = () => {
     const [checkIn, setCheckIn] = useState(false)
+    const [agreeTerms, setAgreeTerms] = useState(false);
     
     const [showPassword, setShowPassword] = useState(false);
     const [showMatchedPassword, setShowMatchedPassword] = useState(false);
-
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -172,8 +172,6 @@ const Register = () => {
                     onChange={(e) => setMatchPassword(e.target.value)}
                     value={matchPassword}
                     required
-                    aria-invalid={isMatchPasswords ? "false" : "true"}
-                    aria-describedby="match_password_instruction"
                     onFocus={() => setMatchPasswordFocus(true)}
                     onBlur={() => setMatchPasswordFocus(false)}
                 />
@@ -203,10 +201,23 @@ const Register = () => {
                     The passwords don't match<br />       
                 </p> 
 
-            </div>           
+            </div> 
+
+            <div className="terms_and_conditions_container">
+                <span className="terms_and_conditions">
+                    <input
+                        type="checkbox"
+                        id="agreeTerms"
+                        onChange={(e) => setAgreeTerms(e.target.checked)}
+                        checked={agreeTerms}
+                    />
+                    I agree to the terms and conditions
+                </span>
+            </div>          
             
             <button className="sign_up_button" type="submit"
-                disabled={!validName || !isValidPassword || !isMatchPasswords ? true : false}>
+                disabled={!validName || !isValidPassword ||
+                !isMatchPasswords  || !agreeTerms ? true : false}>
                 Create account
             </button>
 

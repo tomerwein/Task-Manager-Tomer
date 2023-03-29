@@ -279,11 +279,18 @@ input[type="text"], input[type="password"]{
 .show_password_eye{
     background: none;
     cursor: pointer;
+    position: relative;
     right: 10px;
     top: 5px;
-    position: relative;
-    
     font-size: 0.9rem;
     color: #2f00ff;
 }
+
+.terms_and_conditions{
+    position: relative;
+    right: 10px;
+    top: 12px;
+    font-size: 18px;
+}
+
 
