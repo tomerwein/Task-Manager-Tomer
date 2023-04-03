@@ -7,8 +7,17 @@ import argon2 from 'argon2';
 const app = express();
 const port = 3500;
 
+const allowedOrigins = ['http://localhost:3000', 'http://15.237.81.210'];
+
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
 }));
 
 app.use(bodyParser.json());
@@ -80,7 +89,7 @@ app.post('/register', async (req, res) => {
 
 })
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`Server listening on port ${port}`);
 });
 
