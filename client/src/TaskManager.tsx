@@ -6,7 +6,8 @@ import TaskList from './components/TaskList';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import SignIn from './SignIn';
 
-const UPDATE_URL: string = 'http://localhost:3500/update-tasks';
+// const UPDATE_URL: string = 'http://localhost:8080/update-tasks';
+const UPDATE_URL: string =`${process.env.REACT_APP_API_URL}/update-tasks`;
 
 interface Props {
   username: string,

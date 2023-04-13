@@ -9,7 +9,8 @@ import RegisterSucceed from "./RegisterSucceed";
 
 const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}$/;
 const PASSWORD_REGEX: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[?^*!@#$%]).{8,24}$/;
-const REGISTER_URL: string = 'http://localhost:3500/register';
+// const REGISTER_URL: string = 'http://localhost:8080/register';
+const REGISTER_URL: string =`${process.env.REACT_APP_API_URL}/register`;
 
 const Register = () => {
     const [checkIn, setCheckIn] = useState(false)
