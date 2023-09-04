@@ -14,6 +14,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "server": "nodemon server.js",
     "build": "babel server.js --out-file server.dist.js",
     "devStart": "nodemon server.js --exec node"
   },

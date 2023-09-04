@@ -5,9 +5,10 @@ import fs from 'fs';
 import argon2 from 'argon2';
 
 const app = express();
-const port = 3500;
+const port = 8080 || process.env.PORT;
 
-const allowedOrigins = ['http://localhost:3000', 'http://15.237.81.210'];
+const allowedOrigins = 
+['http://localhost:3000', 'http://my-tasklist-web.s3-website.eu-west-3.amazonaws.com'];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -21,6 +22,10 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+  res.status(200).send('It works!');
+});
 
 app.get('/signin', async (req, res) => {
   const { user, password } = req.query;

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import TaskManager from './TaskManager'
-import SignIn from './SignIn'
+import React, { useEffect, useState, Suspense, lazy } from 'react'
+const TaskManager = lazy(() => import('./TaskManager'));
+const SignIn = lazy(() => import('./SignIn'));
 import Task from './components/taskInfo'
 
 const App: React.FC = () => {
@@ -28,18 +28,21 @@ const App: React.FC = () => {
   }
 
   return (
-    loggedInUser ? 
-    <TaskManager username={loggedInUser}
-    importantTasks={importantTasks}
-    setImportantTasks={setImportantTasks}
-    generalTasks={generalTasks}
-    setGeneralTasks={setGeneralTasks}
-    completedTasks={completedTasks}
-    setCompletedTasks={setCompletedTasks}
-    /> :
-    <div>
-      <SignIn/>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      {loggedInUser ? 
+        <TaskManager username={loggedInUser}
+        importantTasks={importantTasks}
+        setImportantTasks={setImportantTasks}
+        generalTasks={generalTasks}
+        setGeneralTasks={setGeneralTasks}
+        completedTasks={completedTasks}
+        setCompletedTasks={setCompletedTasks}
+        /> :
+        <div>
+          <SignIn/>
+        </div>
+      }
+    </Suspense>
   )
 }
 
