@@ -3,7 +3,7 @@ import Task from './taskInfo'
 import {GrEdit} from 'react-icons/gr'
 import {AiTwotoneDelete} from 'react-icons/ai'
 import {IoMdDoneAll} from 'react-icons/io'
-import './styles.css'
+import './styles/styles.css'
 import { Draggable } from 'react-beautiful-dnd'
 
 type Props = {

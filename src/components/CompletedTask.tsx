@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Task from './taskInfo'
 import {GrEdit, GrReturn} from 'react-icons/gr'
 import {AiTwotoneDelete} from 'react-icons/ai'
-import './styles.css'
+import './styles/styles.css'
 import { Draggable } from 'react-beautiful-dnd'
 
 type Props = {
